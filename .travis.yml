@@ -26,7 +26,9 @@ install:
  - make -j$JOBS
 
 before_script:
- - make dist
+ #- make dist
 
 script:
+ - sudo apt-get install -y python-pip
+ - sudo pip install awscli
  - cd ../ && ./update_shashums.sh

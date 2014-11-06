@@ -8,7 +8,8 @@ compiler:
 
 env:
   matrix:
-  - NODE_VERSION="0.10.33" JOBS=4 S3_URL=s3://mapbox/node-cpp11
+  - NODE_VERSION="0.10.33" JOBS=6 S3_URL=s3://mapbox/node-cpp11
+  - NODE_VERSION="0.11.14" JOBS=6 S3_URL=s3://mapbox/node-cpp11
   global:
   - secure: QWLkZJm5/wfsX8KpEmaATS2niYyNWxByv/u2eQIWq5ytkJoz0wBfGdRQiXdiU123qHF2vEJYA/jOUKPhGGNSSkYC93LmthpOF1PNRf/3i2R/oqtf0RH26p3ObPa/cO3xQKbQzk6QG8opEcoC54UK+5Zs+3z17jjYGHoUNFVlGGU=
   - secure: YkSU0N8N5EAnMCxSHC20Oc24Ednq0nh+ODBnZaHJYNNf6gX1zKgWi9fl7EpmhwPLJy6Pi/J+zDf3aiwB76SfIugdxVYdSwXbRpAaXgDvYATuNpq5YJC9DqZ8Ly3VSED4WKNE1DSLqfIyLpvcaddTRL5SIx0Dqs/YYIzoEEaPs0Q=

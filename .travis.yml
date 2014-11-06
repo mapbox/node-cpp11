@@ -1,0 +1,36 @@
+language: cpp
+
+os:
+  - linux
+
+compiler:
+ - clang
+
+env:
+  matrix:
+   - NODE_VERSION="0.10.33" JOBS=4
+
+before_install:
+ - platform=$(uname -s | sed "y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/")
+ # upgrade libstdc++ to support C++11
+ - if [[ ${platform} == 'linux' ]]; then sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test;sudo apt-get update -y;sudo apt-get install -y libstdc++6; fi;
+ - if [[ ${platform} == 'darwin' ]]; then xcrun --sdk macosx --show-sdk-version; fi;
+ - if [[ "${CXX}" == 'g++' ]]; then export JOBS=2; sudo apt-get install gcc-4.8 g++-4.8; export CXX="$(which g++-4.8)"; export CC="$(which gcc-4.8)"; fi;
+ - if [[ "${CXX}" == 'clang++' ]]; then export JOBS=4; export CXX="$(which clang++)"; export CC="$(which clang)"; fi;
+
+install:
+ #- wget http://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}.tar.gz
+ #- tar xf node-v${NODE_VERSION}.tar.gz
+ #- cd node-v${NODE_VERSION}
+ - git clone https://github.com/joyent/node v${NODE_VERSION}
+ - cd v${NODE_VERSION}
+ - git checkout origin/v${NODE_VERSION}-release
+ - cd ../
+ - ./configure --prefix=/tmp/node-${NODE_VERSION}
+ - make -j$JOBS
+
+before_script:
+ - make dist
+
+script:
+ - true

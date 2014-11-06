@@ -8,7 +8,7 @@ compiler:
 
 env:
   matrix:
-   - NODE_VERSION="0.10.33" JOBS=4
+   - NODE_VERSION="0.10.33" JOBS=4 S3_URL=s3://mapbox/node-cpp11
 
 before_install:
  - platform=$(uname -s | sed "y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/")
@@ -19,13 +19,9 @@ before_install:
  - if [[ "${CXX}" == 'clang++' ]]; then export JOBS=4; export CXX="$(which clang++)"; export CC="$(which clang)"; fi;
 
 install:
- #- wget http://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}.tar.gz
- #- tar xf node-v${NODE_VERSION}.tar.gz
- #- cd node-v${NODE_VERSION}
  - git clone https://github.com/joyent/node v${NODE_VERSION}
  - cd v${NODE_VERSION}
  - git checkout origin/v${NODE_VERSION}-release
- - cd ../
  - ./configure --prefix=/tmp/node-${NODE_VERSION}
  - make -j$JOBS
 
@@ -33,4 +29,4 @@ before_script:
  - make dist
 
 script:
- - true
+ - cd ../ && ./update_shashums.sh

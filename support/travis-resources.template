@@ -17,8 +17,9 @@
                                     ],
                                     "Effect": "Allow",
                                     "Resource": [
-                                        "arn:aws:s3:::mapbox/node-cpp11"
-                                    ]
+                                        "arn:aws:s3:::mapbox"
+                                    ],
+                                    "Condition":{"StringLike":{"s3:prefix":["node-cpp11/*"]}}
                                 }
                             ]
                         }

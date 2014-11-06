@@ -1,6 +1,7 @@
 #!/bin/bash
 
 SCRATCH_DIR=/tmp/${NODE_VERSION}
+mkdir -p ${SCRATCH_DIR}
 aws s3 cp --recursive ${S3_URL}/${NODE_VERSION} ${SCRATCH_DIR}
 cd ${SCRATCH_DIR}
 for i in $(ls ./*.*); do 

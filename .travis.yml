@@ -22,18 +22,20 @@ before_install:
   export CXX="$(which g++-4.8)"; export CC="$(which gcc-4.8)"; fi;
 - if [[ "${CXX}" == 'clang++' ]]; then export JOBS=4; export CXX="$(which clang++)";
   export CC="$(which clang)"; fi;
+- sudo apt-get install -y python-pip
+- sudo pip install awscli
 
 install:
 - git clone https://github.com/joyent/node v${NODE_VERSION}
 - cd v${NODE_VERSION}
 - git checkout origin/v${NODE_VERSION}-release
-- "./configure --prefix=/tmp/node-${NODE_VERSION}"
-- make -j$JOBS
+- ./configure --prefix=/tmp/node-${NODE_VERSION}
 
 before_script:
-- true
+- make -j$JOBS node-v${NODE_VERSION}-${platform}-x64.tar.gz
+- aws s3 cp node-v${NODE_VERSION}-${platform}-x64.tar.gz ${S3_URL}/node-v${NODE_VERSION}-${platform}-x64.tar.gz
+- make node-v${NODE_VERSION}.tar.gz
+- aws s3 cp node-v${NODE_VERSION}.tar.gz ${S3_URL}/node-v${NODE_VERSION}.tar.gz
 
 script:
-- sudo apt-get install -y python-pip
-- sudo pip install awscli
 - cd ../ && ./update_shashums.sh

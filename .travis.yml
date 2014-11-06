@@ -33,9 +33,9 @@ install:
 
 before_script:
 - make -j$JOBS node-v${NODE_VERSION}-${platform}-x64.tar.gz
-- aws s3 cp node-v${NODE_VERSION}-${platform}-x64.tar.gz ${S3_URL}/node-v${NODE_VERSION}-${platform}-x64.tar.gz
+- aws s3 cp --acl public-read node-v${NODE_VERSION}-${platform}-x64.tar.gz ${S3_URL}/v${NODE_VERSION}/node-v${NODE_VERSION}-${platform}-x64.tar.gz
 - make node-v${NODE_VERSION}.tar.gz
-- aws s3 cp node-v${NODE_VERSION}.tar.gz ${S3_URL}/node-v${NODE_VERSION}.tar.gz
+- aws s3 cp --acl public-read node-v${NODE_VERSION}.tar.gz ${S3_URL}/v${NODE_VERSION}/node-v${NODE_VERSION}.tar.gz
 
 script:
 - cd ../ && ./update_shashums.sh

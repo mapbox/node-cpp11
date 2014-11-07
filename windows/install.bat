@@ -10,7 +10,7 @@ call wget --no-check-certificate -q https://www.python.org/ftp/python/2.7.8/pyth
 call msiexec /quiet /i python-2.7.8.amd64.msi
 
 :: build
-cd Z:\node-cpp11\windows
-call .\settings.bat 64 14 release > Z:\build1.log
-call .\build_node.bat > Z:\build2.log
+cd Z:\node-cpp11
+call .\windows\settings.bat 64 14 release > Z:\build1.log
+call .\windows\build_node.bat > Z:\build2.log
 

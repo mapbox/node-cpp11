@@ -7,6 +7,15 @@ set -e -u
 TMP=$(mktemp -d -t node-cpp11.XXXX )
 CWD=$(pwd)
 
+GithubAccessToken="dummytoken"
+ConfigJSON="$TMP/$TRAVIS_BUILD_ID-cfn.json"
+UserData=$(node -e "console.log(JSON.stringify(require('fs').readFileSync('$(dirname $0)/cfn_build_node.userdata.bat','utf8')))")
+echo "{
+    \"OS\": \"win2012-vs2014\",
+    \"GithubAccessToken\": \"$GithubAccessToken\",
+    \"UserData\": $UserData
+}" >> $ConfigJSON
+
 cd $TMP
 
 # install node
@@ -17,14 +26,6 @@ curl -s https://s3.amazonaws.com/mapbox/apps/install-node/v0.2.0/run | NV=0.10.3
 # install cfn-ci + cfn-config
 npm install https://github.com/mapbox/cfn-ci/tarball/windows
 npm install cfn-config@0.3.0
-
-GithubAccessToken="dummytoken"
-ConfigJSON="$TMP/$TRAVIS_BUILD_ID-cfn.json"
-echo "{
-    \"OS\": \"win2012-vs2014\",
-    \"GithubAccessToken\": \"$GithubAccessToken\",
-    \"UserData\": \"call cinst git.install\ncall git clone -b windows https://github.com/mapbox/node-cpp11 Z:\\\\node-cpp11\ncall Z:\\\\node-cpp11\\\\windows\\\\install.bat\"
-}" >> $ConfigJSON
 
 # create cfn stack for building
 $TMP/node_modules/.bin/cfn-create -f -r us-east-1 -n "node-cpp11-$TRAVIS_BUILD_ID" -t $TMP/node_modules/cfn-ci/cfn-win.template -c $ConfigJSON || echo "cfn-create failed, cleaning up ..."

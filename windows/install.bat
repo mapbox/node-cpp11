@@ -1,9 +1,3 @@
-:: start on Z:\ drive
-cd /d Z:\
-
-:: turn off windows firewall
-netsh advfirewall set allprofiles state off
-
 :: install deps
 cinst wget
 cinst 7zip

@@ -9,7 +9,13 @@ CWD=$(pwd)
 
 GithubAccessToken="dummytoken"
 ConfigJSON="$TMP/$TRAVIS_BUILD_ID-cfn.json"
-UserData=$(node -e "console.log(JSON.stringify(require('fs').readFileSync('$(dirname $0)/cfn_build_node.userdata.bat','utf8')))")
+UserData=$(node -e "
+    var userdata = '';
+    userdata += 'set AWS_ACCESS_KEY_ID=$BUILD_AWS_ACCESS_KEY_ID\n';
+    userdata += 'set AWS_SECRET_ACCESS_KEY=$BUILD_AWS_SECRET_ACCESS_KEY\n';
+    userdata += require('fs').readFileSync('$(dirname $0)/cfn_build_node.userdata.bat','utf8');
+    console.log(JSON.stringify(userdata));
+")
 echo "{
     \"OS\": \"win2012-vs2014\",
     \"GithubAccessToken\": \"$GithubAccessToken\",

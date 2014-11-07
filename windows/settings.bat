@@ -1,27 +1,17 @@
 @echo off
 
-SET EL=0
+::SET MAPNIKBRANCH=2.3.x
+SET MAPNIKBRANCH=master
+
+::SET NODEMAPNIKBRANCH=1.x
+SET NODEMAPNIKBRANCH=master
+
 SET BUILD_TYPE=Release
 SET SKIP_FAILED_PATCH=false
 
 IF "%1"=="" GOTO USAGE
 IF "%2"=="" GOTO USAGE
 IF "%3"=="" (SET BUILD_TYPE=Release) ELSE (SET BUILD_TYPE=%3%)
-GOTO BUILD
-
-:USAGE
-ECHO usage:
-ECHO settings.bat ^<target_arch^> ^<tools_version^> ^<build_type^>
-ECHO settings.bat 32^|64 12^|14 Release^|Debug
-EXIT /b 1
-
-:ERROR
-ECHO ===== ERROR ====
-CD %ROOTDIR%
-EXIT /b 1
-
-:BUILD
-echo ------ NODEJS -----
 
 ECHO BUILD_TYPE %BUILD_TYPE%
 
@@ -82,33 +72,43 @@ if "%TOOLS_VERSION%" == "14.0" (
 
 set PATH=%CD%\tmp-bin;%PATH%
 echo "building within %current_script_dir%"
+set ICU_VERSION=53.1
+set ICU_VERSION2=53_1
+set BOOST_VERSION=56
+set WEBP_VERSION=0.4.0
+set JPEG_VERSION=8d
+set FREETYPE_VERSION=2.5.3
+set ZLIB_VERSION=1.2.5
+set LIBPNG_VERSION=1.6.12
+set POSTGRESQL_VERSION=9.3.4
+set TIFF_VERSION=4.0.3
+set PIXMAN_VERSION=0.32.6
+set CAIRO_VERSION=1.12.16
+set LIBXML2_VERSION=2.9.1
+set PROJ_VERSION=4.8.0
+set PROJ_GRIDS_VERSION=1.5
+set EXPAT_VERSION=2.1.0
+set GDAL_VERSION=1.11.1
+set SQLITE_VERSION=3080600
+set PROTOBUF_VERSION=2.5.0
+set HARFBUZZ_VERSION=0.9.35
+set GEOS_VERSION=3.4.2
+set PYTHON_VERSION=2.7.8
 SET NODE_VERSION=0.10.33
 
-:: guard to make sure settings have been sourced
-IF "%ROOTDIR%"=="" ( echo "ROOTDIR variable not set" && GOTO DONE )
+GOTO DONE
 
-SET NODE_VERSION=0.10.33
-SET PUB=0
-IF "%1"=="" ( ECHO using default %NODE_VERSION% ) ELSE ( SET NODE_VERSION=%1)
+:USAGE
+ECHO usage:
+ECHO settings.bat ^<target_arch^> ^<tools_version^> ^<build_type^>
+ECHO settings.bat 32^|64 12^|14 Release^|Debug
+EXIT /b 1
 
-ECHO using %NODE_VERSION%
+GOTO DONE
 
-cd %PKGDIR%
-if NOT EXIST node-v%NODE_VERSION% (
-    git clone https://github.com/joyent/node.git node-v%NODE_VERSION%
-)
+:ERROR
+ECHO ===== ERROR ====
+CD %ROOTDIR%
+EXIT /b 1
 
-cd node-v%NODE_VERSION%
-IF ERRORLEVEL 1 GOTO ERROR
-
-:: clear out previous PATCHES
-git checkout .
-IF ERRORLEVEL 1 GOTO ERROR
-
-git fetch -v
-IF ERRORLEVEL 1 GOTO ERROR
-
-git checkout origin/v%NODE_VERSION%-release
-IF ERRORLEVEL 1 GOTO ERROR
-
-
+:DONE

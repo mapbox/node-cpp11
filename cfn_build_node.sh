@@ -39,7 +39,7 @@ timeout 1200 $TMP/node_modules/.bin/cfn-create -f -r us-east-1 -n "travis-node-c
 
 # Node builds can take a long time.
 # Output for travis to chew on to avoid 10 min "no output" timeout.
-while [ $(jobs | wc -l) -gt 0 ]; do
+while [ $(jobs | grep cfn-create | wc -l) -gt 0 ]; do
     sleep 60
     echo "    ..."
 done

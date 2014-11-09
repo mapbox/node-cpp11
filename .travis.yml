@@ -1,5 +1,7 @@
 language: node_js
 
+cache: apt
+
 node_js:
   - "0.10"
 

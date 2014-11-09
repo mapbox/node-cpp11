@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 # launches cfnci stack in sandbox
 # passes BUILD_* keys to cfnci stack for publishing to mapbox bucket
 AWS_ACCESS_KEY_ID=$SANDBOX_AWS_ACCESS_KEY_ID \
@@ -11,4 +13,4 @@ BUILD_AWS_SECRET_ACCESS_KEY=$MAPBOX_AWS_SECRET_ACCESS_KEY \
 # uploads shasums to mapbox bucket
 AWS_ACCESS_KEY_ID=$MAPBOX_AWS_ACCESS_KEY_ID \
 AWS_SECRET_ACCESS_KEY=$MAPBOX_AWS_SECRET_ACCESS_KEY \
-- ./update_shashums.sh
+./update_shashums.sh

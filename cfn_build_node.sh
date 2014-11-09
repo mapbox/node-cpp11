@@ -35,7 +35,18 @@ npm install https://github.com/mapbox/cfn-ci/tarball/windows
 npm install cfn-config@0.3.0
 
 # create cfn stack for building
-timeout 1200 $TMP/node_modules/.bin/cfn-create -f -r us-east-1 -n "travis-node-cpp11-$TRAVIS_BUILD_ID" -t $TMP/node_modules/cfn-ci/cfn-win.template -c $ConfigJSON || echo "cfn-create failed, cleaning up ..."
+timeout 1200 $TMP/node_modules/.bin/cfn-create -f -r us-east-1 -n "travis-node-cpp11-$TRAVIS_BUILD_ID" -t $TMP/node_modules/cfn-ci/cfn-win.template -c $ConfigJSON || echo "cfn-create failed, cleaning up ..." &
+
+# Node builds can take a long time.
+# Output for travis to chew on to avoid 10 min "no output" timeout.
+sleep 300
+echo "..."
+sleep 300
+echo "..."
+
+fg
+
+wait
 
 $TMP/node_modules/.bin/cfn-delete -f -r us-east-1 -n "travis-node-cpp11-$TRAVIS_BUILD_ID"
 

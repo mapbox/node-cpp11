@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 TRAVIS_BUILD_ID=${TRAVIS_BUILD_ID:-"localdev"}
+GithubAccessToken=${GithubAccessToken:-"dummy"}
 
 set -e -u
 
 TMP=$(mktemp -d -t node-cpp11.XXXX )
 CWD=$(pwd)
 
-GithubAccessToken="dummytoken"
 ConfigJSON="$TMP/$TRAVIS_BUILD_ID-cfn.json"
 UserData=$(node -e "
     var userdata = '';
@@ -34,9 +34,9 @@ npm install https://github.com/mapbox/cfn-ci/tarball/windows
 npm install cfn-config@0.3.0
 
 # create cfn stack for building
-$TMP/node_modules/.bin/cfn-create -f -r us-east-1 -n "node-cpp11-$TRAVIS_BUILD_ID" -t $TMP/node_modules/cfn-ci/cfn-win.template -c $ConfigJSON || echo "cfn-create failed, cleaning up ..."
+timeout 1200 $TMP/node_modules/.bin/cfn-create -f -r us-east-1 -n "travis-node-cpp11-$TRAVIS_BUILD_ID" -t $TMP/node_modules/cfn-ci/cfn-win.template -c $ConfigJSON || echo "cfn-create failed, cleaning up ..."
 
-# $(dirname $0)/../node_modules/.bin/cfn-delete -f -r us-east-1 -n "node-cpp11-$TRAVIS_BUILD_ID-$Context"
+$TMP/node_modules/.bin/cfn-delete -f -r us-east-1 -n "travis-node-cpp11-$TRAVIS_BUILD_ID"
 
 cd $CWD
 

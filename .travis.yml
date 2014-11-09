@@ -5,8 +5,8 @@ node_js:
 
 env:
   global:
-  - secure: "Z2ail/SjHgR1lrOjUDkJEjqfLPENxkxPHw5BozQeDLStdjIV6TFbWimhN4aliKjaR8d/dhXBQoU3PZxT09G9d7MEbWU6JlMh/8MxDdgk+xal9TYhUIZZMvx3ioGsK9pKQMPkQp3uIGeagZbhvcbF7MZmm33cC2t5xDx/h3ghuFI="
-  - secure: "YvCJEs37Kh/KQ/9iKY3d/XvZeEDwWHGHFwlSuDG4u50pgmewm4n2/zXzNA2ZOF7cHnPDAFQ9S7ENgHPV+9YO+KWpK7O8ePCB6hE5ktHsmdZDg53dh7xxAeMzZ3Cc/RIBulYcq1enk2gNOa+nJAB7pICcYg0tInc5OqIC75axg64="
+  - secure: "QBFgsoBkhQHDVJChsdyUoL5FoFsZ6Je+c+Hvl5TZuI51QQCMu2TDY+qDC9/tHpzVQEr7PTHxB0m5rp6e6Q5HcRzhQwYjUC3AVkkZBfEJlfWPionIVcyZqQNbomhBlMkM8sWeTgopPMqW8kGFaWMfU2ZkRoll78vMcYSmw6VBS/Y="
+  - secure: "igL6w789tFas8Vadj2uXVUnr8Z+8AwNJfCUDuWPtrxeX2tIwvzNsbiT+untMgSULlIzT5zbBCvXW6MjyUmsMAnZalHoQqIaEnLPM12gazf2wr7cUpCxZbGE/ukCcqoBnW+8MLNahQAu4xEks460oN5r9S3ngVPGeTeJv50iM8Ss="
   - secure: "II07EH8qNtu97EY/VXlRwZ4EgzVShLS8gztXCFkLXCbdNWn+ZWOdAf0QIpgnFEGx8/M1QOLqQCmEaUyl6S9cs/yRg94wKtX6g4JQ3KRVNi7yn7TBYGBBKBAzB2rZP84I4LKBJZqJIQm1ZQcfEfJT+BlUd6vBH5Y6FJltHTKq5Yk="
   - secure: "FM2LKGe8UfXJeoqWnAk29Ib5yIIpKp221GZLgMSk0TanF2YWz+/dGTQu0kHyx1wlS+4zzzzNE9n4PMGcV1SUU5sbFfOL0bweIQwrjFPv0ayxGXqAptYm7BzXsCilGPYt9EKIz/Q78tVxnpyQZKnwLVAt6TCexQCburFPZjbkH7M="
 
@@ -15,5 +15,4 @@ before_install:
 - sudo pip install awscli
 
 script:
-- AWS_ACCESS_KEY_ID=$SANDBOX_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$SANDBOX_AWS_SECRET_ACCESS_KEY ./cfn_build_node.sh
-- ./update_shashums.sh
+- ./.travis.sh

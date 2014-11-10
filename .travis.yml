@@ -16,7 +16,7 @@ env:
   - secure: "FM2LKGe8UfXJeoqWnAk29Ib5yIIpKp221GZLgMSk0TanF2YWz+/dGTQu0kHyx1wlS+4zzzzNE9n4PMGcV1SUU5sbFfOL0bweIQwrjFPv0ayxGXqAptYm7BzXsCilGPYt9EKIz/Q78tVxnpyQZKnwLVAt6TCexQCburFPZjbkH7M="
 
 before_install:
-- sudo apt-get install -y python-pip
+- sudo apt-get install -qqy curl unzip python-pip mono-devel expect
 - sudo pip install awscli
 
 script:

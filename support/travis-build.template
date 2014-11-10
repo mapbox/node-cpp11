@@ -43,6 +43,24 @@
                                 }
                             ]
                         }
+                    },
+                    {
+                        "PolicyName": "signing",
+                        "PolicyDocument": {
+                            "Statement": [
+                                {
+                                    "Action": [
+                                        "s3:GetObject",
+                                        "s3:GetObjectAcl"
+                                    ],
+                                    "Effect": "Allow",
+                                    "Resource": [
+                                        "arn:aws:s3:::mapbox/atlas-server/certs/authenticode.spc",
+                                        "arn:aws:s3:::mapbox/atlas-server/certs/authenticode.pvk"
+                                    ]
+                                }
+                            ]
+                        }
                     }
                 ]
             }

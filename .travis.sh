@@ -2,6 +2,13 @@
 
 set -e
 
+export COMMIT_MESSAGE=$(git show -s --format=%B $TRAVIS_COMMIT | tr -d '\n')
+
+if ! echo "$COMMIT_MESSAGE" | grep '\[publish' > /dev/null; then
+    echo "Include [publish] in commit message to build."
+    exit 0
+fi
+
 # build node source tarball and publish
 # commented until we need to build for a new node version
 #AWS_ACCESS_KEY_ID=$MAPBOX_AWS_ACCESS_KEY_ID \

@@ -2,6 +2,8 @@
 
 set -e
 
+export COMMIT_MESSAGE=$(git show -s --format=%B $TRAVIS_COMMIT | tr -d '\n')
+
 if ! echo "$COMMIT_MESSAGE" | grep '\[publish' > /dev/null; then
     echo "Include [publish] in commit message to build."
     exit 0

@@ -22,18 +22,44 @@ IF ERRORLEVEL 1 GOTO ERROR
 ECHO.
 ECHO ---------------- BUILDING  NODE %NODE_VERSION% --------------
 
-CALL vcbuild.bat %BUILD_TYPE% x%TARGET_ARCH% nosign
-IF ERRORLEVEL 1 GOTO ERROR
-
-:: 32 bit (need to actually put 32 bit libs here)
-:: call aws s3 cp --acl public-read Release\node.exe s3://mapbox/node-cpp11/v%NODE_VERSION%/
-:: call aws s3 cp --acl public-read Release\node.lib s3://mapbox/node-cpp11/v%NODE_VERSION%/
-:: call aws s3 cp --acl public-read Release\node.exp s3://mapbox/node-cpp11/v%NODE_VERSION%/
+SET BUILD_TYPE=Release
 
 :: 64 bit
+CALL vcbuild.bat %BUILD_TYPE% x64 nosign
+IF ERRORLEVEL 1 GOTO ERROR
+
 call aws s3 cp --acl public-read Release\node.exe s3://mapbox/node-cpp11/v%NODE_VERSION%/x64/
+IF ERRORLEVEL 1 GOTO ERROR
 call aws s3 cp --acl public-read Release\node.lib s3://mapbox/node-cpp11/v%NODE_VERSION%/x64/
+IF ERRORLEVEL 1 GOTO ERROR
 call aws s3 cp --acl public-read Release\node.exp s3://mapbox/node-cpp11/v%NODE_VERSION%/x64/
+IF ERRORLEVEL 1 GOTO ERROR
+call aws s3 cp --acl public-read Release\node.pdb s3://mapbox/node-cpp11/v%NODE_VERSION%/x64/
+IF ERRORLEVEL 1 GOTO ERROR
+call aws s3 cp --acl public-read Release\openssl-cli.exe s3://mapbox/node-cpp11/v%NODE_VERSION%/x64/
+IF ERRORLEVEL 1 GOTO ERROR
+call aws s3 cp --acl public-read Release\openssl-cli.pdb s3://mapbox/node-cpp11/v%NODE_VERSION%/x64/
+IF ERRORLEVEL 1 GOTO ERROR
+
+:: clean to prepare for 32 bit build
+CALL vcbuild.bat %BUILD_TYPE% clean x64 nosign
+
+:: 32 bit
+CALL vcbuild.bat %BUILD_TYPE% x86 nosign
+IF ERRORLEVEL 1 GOTO ERROR
+
+call aws s3 cp --acl public-read Release\node.exe s3://mapbox/node-cpp11/v%NODE_VERSION%/
+IF ERRORLEVEL 1 GOTO ERROR
+call aws s3 cp --acl public-read Release\node.lib s3://mapbox/node-cpp11/v%NODE_VERSION%/
+IF ERRORLEVEL 1 GOTO ERROR
+call aws s3 cp --acl public-read Release\node.exp s3://mapbox/node-cpp11/v%NODE_VERSION%/
+IF ERRORLEVEL 1 GOTO ERROR
+call aws s3 cp --acl public-read Release\node.pdb s3://mapbox/node-cpp11/v%NODE_VERSION%/
+IF ERRORLEVEL 1 GOTO ERROR
+call aws s3 cp --acl public-read Release\openssl-cli.exe s3://mapbox/node-cpp11/v%NODE_VERSION%/
+IF ERRORLEVEL 1 GOTO ERROR
+call aws s3 cp --acl public-read Release\openssl-cli.pdb s3://mapbox/node-cpp11/v%NODE_VERSION%/
+IF ERRORLEVEL 1 GOTO ERROR
 
 ::ECHO.
 ::ECHO ------------------------------------------------------------

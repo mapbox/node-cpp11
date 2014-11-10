@@ -5,7 +5,7 @@ if [[ ${NODE_VERSION:-false} == false ]]; then
     exit 1
 fi
 
-if [[ ${S3_URL}:-false} == false ]]; then
+if [[ ${S3_URL:-false} == false ]]; then
     echo '${S3_URL}' must be defined
     exit 1
 fi

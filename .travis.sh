@@ -2,6 +2,11 @@
 
 set -e
 
+if ! echo "$COMMIT_MESSAGE" | grep '[publish' > /dev/null; then
+    echo "Include [publish] in commit message to build."
+    exit 0
+fi
+
 # build node source tarball and publish
 AWS_ACCESS_KEY_ID=$MAPBOX_AWS_ACCESS_KEY_ID \
 AWS_SECRET_ACCESS_KEY=$MAPBOX_AWS_SECRET_ACCESS_KEY \

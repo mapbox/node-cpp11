@@ -6,6 +6,7 @@ if [[ ${NODE_VERSION:-false} == false ]]; then
 fi
 
 TRAVIS_BUILD_ID=${TRAVIS_BUILD_ID:-"localdev"}
+COMMIT_MESSAGE=${COMMIT_MESSAGE:-"commit"}
 GithubAccessToken=${GithubAccessToken:-"dummy"}
 
 set -e -u
@@ -52,7 +53,11 @@ done
 
 wait
 
-$TMP/node_modules/.bin/cfn-delete -f -r us-east-1 -n "travis-node-cpp11-$TRAVIS_BUILD_ID"
+if echo "$COMMIT_MESSAGE" | grep '[publish debug]' > /dev/null; then
+    echo "Commit inclues [publish debug] skipping stack teardown."
+else
+    $TMP/node_modules/.bin/cfn-delete -f -r us-east-1 -n "travis-node-cpp11-$TRAVIS_BUILD_ID"
+fi
 
 cd $CWD
 

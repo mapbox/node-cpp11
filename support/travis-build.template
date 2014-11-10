@@ -50,6 +50,7 @@
                             "Statement": [
                                 {
                                     "Action": [
+                                        "s3:HeadObject",
                                         "s3:GetObject",
                                         "s3:GetObjectAcl"
                                     ],

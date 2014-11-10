@@ -56,8 +56,8 @@
                                     ],
                                     "Effect": "Allow",
                                     "Resource": [
-                                        "arn:aws:s3:::mapbox/atlas-server/certs/authenticode.spc",
-                                        "arn:aws:s3:::mapbox/atlas-server/certs/authenticode.pvk"
+                                        "arn:aws:s3:::mapbox/mapbox-studio/certs/authenticode.spc",
+                                        "arn:aws:s3:::mapbox/mapbox-studio/certs/authenticode.pvk"
                                     ]
                                 }
                             ]

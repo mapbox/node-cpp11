@@ -2,7 +2,7 @@
 
 set -e
 
-if ! echo "$COMMIT_MESSAGE" | grep '[publish' > /dev/null; then
+if ! echo "$COMMIT_MESSAGE" | grep '\[publish' > /dev/null; then
     echo "Include [publish] in commit message to build."
     exit 0
 fi

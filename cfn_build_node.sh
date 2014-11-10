@@ -54,7 +54,7 @@ done
 wait
 
 if echo "$COMMIT_MESSAGE" | grep '\[publish debug\]' > /dev/null; then
-    echo "Commit inclues [publish debug] skipping stack teardown."
+    echo "Commit includes [publish debug] skipping stack teardown."
 else
     $TMP/node_modules/.bin/cfn-delete -f -r us-east-1 -n "travis-node-cpp11-$TRAVIS_BUILD_ID"
 fi

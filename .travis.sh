@@ -3,9 +3,10 @@
 set -e
 
 # build node source tarball and publish
-AWS_ACCESS_KEY_ID=$MAPBOX_AWS_ACCESS_KEY_ID \
-AWS_SECRET_ACCESS_KEY=$MAPBOX_AWS_SECRET_ACCESS_KEY \
-./build_source.sh
+# commented until we need to build for a new node version
+#AWS_ACCESS_KEY_ID=$MAPBOX_AWS_ACCESS_KEY_ID \
+#AWS_SECRET_ACCESS_KEY=$MAPBOX_AWS_SECRET_ACCESS_KEY \
+#./build_source.sh
 
 # launches cfnci stack in sandbox
 # passes BUILD_* keys to cfnci stack for publishing to mapbox bucket

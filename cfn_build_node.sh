@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [[ ${NODE_VERSION:-false} == false ]]; then
+    echo '${NODE_VERSION}' must be defined
+    exit 1
+fi
+
 TRAVIS_BUILD_ID=${TRAVIS_BUILD_ID:-"localdev"}
 GithubAccessToken=${GithubAccessToken:-"dummy"}
 
@@ -11,6 +16,7 @@ CWD=$(pwd)
 ConfigJSON="$TMP/$TRAVIS_BUILD_ID-cfn.json"
 UserData=$(node -e "
     var userdata = '';
+    userdata += 'set NODE_VERSION=$NODE_VERSION\n';
     userdata += 'set AWS_ACCESS_KEY_ID=$BUILD_AWS_ACCESS_KEY_ID\n';
     userdata += 'set AWS_SECRET_ACCESS_KEY=$BUILD_AWS_SECRET_ACCESS_KEY\n';
     userdata += require('fs').readFileSync('$(dirname $0)/cfn_build_node.userdata.bat','utf8');

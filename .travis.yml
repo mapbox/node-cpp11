@@ -14,9 +14,10 @@ env:
   - secure: "igL6w789tFas8Vadj2uXVUnr8Z+8AwNJfCUDuWPtrxeX2tIwvzNsbiT+untMgSULlIzT5zbBCvXW6MjyUmsMAnZalHoQqIaEnLPM12gazf2wr7cUpCxZbGE/ukCcqoBnW+8MLNahQAu4xEks460oN5r9S3ngVPGeTeJv50iM8Ss="
   - secure: "II07EH8qNtu97EY/VXlRwZ4EgzVShLS8gztXCFkLXCbdNWn+ZWOdAf0QIpgnFEGx8/M1QOLqQCmEaUyl6S9cs/yRg94wKtX6g4JQ3KRVNi7yn7TBYGBBKBAzB2rZP84I4LKBJZqJIQm1ZQcfEfJT+BlUd6vBH5Y6FJltHTKq5Yk="
   - secure: "FM2LKGe8UfXJeoqWnAk29Ib5yIIpKp221GZLgMSk0TanF2YWz+/dGTQu0kHyx1wlS+4zzzzNE9n4PMGcV1SUU5sbFfOL0bweIQwrjFPv0ayxGXqAptYm7BzXsCilGPYt9EKIz/Q78tVxnpyQZKnwLVAt6TCexQCburFPZjbkH7M="
+  - secure: "sA/zUb07WEB168qWy3SoqEOHgH/87FHtaPy/X7cEClgtcNXUCisLO+vTNq7Gee1PmYVilim0CRGqf71B1SgRmo1zJwzgKJg+LJN1RZtZ+dEhBKKU6S7KLBqn21k1mUti+iqf3CRUKj1KgadyEh67VmjJ59g0LIbnvCYwW/X4Utc="
 
 before_install:
-- sudo apt-get install -y python-pip
+- sudo apt-get install -qqy curl unzip python-pip mono-devel expect
 - sudo pip install awscli
 
 script:

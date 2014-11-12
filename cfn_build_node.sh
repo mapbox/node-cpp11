@@ -5,7 +5,7 @@ if [[ ${NODE_VERSION:-false} == false ]]; then
     exit 1
 fi
 
-TRAVIS_BUILD_ID=${TRAVIS_BUILD_ID:-"localdev"}
+TRAVIS_JOB_ID=${TRAVIS_JOB_ID:-"localdev"}
 COMMIT_MESSAGE=${COMMIT_MESSAGE:-"commit"}
 GithubAccessToken=${GithubAccessToken:-"dummy"}
 
@@ -14,7 +14,7 @@ set -e -u
 TMP=$(mktemp -d -t node-cpp11.XXXX )
 CWD=$(pwd)
 
-ConfigJSON="$TMP/$TRAVIS_BUILD_ID-cfn.json"
+ConfigJSON="$TMP/$TRAVIS_JOB_ID-cfn.json"
 UserData=$(node -e "
     var userdata = '';
     userdata += 'set NODE_VERSION=$NODE_VERSION\n';
@@ -42,7 +42,7 @@ npm install https://github.com/mapbox/cfn-ci/tarball/windows
 npm install cfn-config@0.3.0
 
 # create cfn stack for building
-timeout 1200 $TMP/node_modules/.bin/cfn-create -f -r us-east-1 -n "travis-node-cpp11-$TRAVIS_BUILD_ID" -t $TMP/node_modules/cfn-ci/cfn-win.template -c $ConfigJSON || echo "cfn-create failed, cleaning up ..." &
+timeout 1200 $TMP/node_modules/.bin/cfn-create -f -r us-east-1 -n "travis-node-cpp11-$TRAVIS_JOB_ID" -t $TMP/node_modules/cfn-ci/cfn-win.template -c $ConfigJSON || echo "cfn-create failed, cleaning up ..." &
 
 # Node builds can take a long time.
 # Output for travis to chew on to avoid 10 min "no output" timeout.
@@ -56,7 +56,7 @@ wait
 if echo "$COMMIT_MESSAGE" | grep '\[publish debug\]' > /dev/null; then
     echo "Commit includes [publish debug] skipping stack teardown."
 else
-    $TMP/node_modules/.bin/cfn-delete -f -r us-east-1 -n "travis-node-cpp11-$TRAVIS_BUILD_ID"
+    $TMP/node_modules/.bin/cfn-delete -f -r us-east-1 -n "travis-node-cpp11-$TRAVIS_JOB_ID"
 fi
 
 cd $CWD

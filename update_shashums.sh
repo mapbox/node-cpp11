@@ -5,12 +5,12 @@ if [[ ${NODE_VERSION:-false} == false ]]; then
     exit 1
 fi
 
-if [[ ${S3_URL}:-false} == false ]]; then
+if [[ ${S3_URL:-false} == false ]]; then
     echo '${S3_URL}' must be defined
     exit 1
 fi
 
-SCRATCH_DIR=/tmp/v${NODE_VERSION}
+SCRATCH_DIR=/tmp/v${NODE_VERSION}-scratch
 mkdir -p ${SCRATCH_DIR}
 aws s3 cp --recursive ${S3_URL}/v${NODE_VERSION}/ ${SCRATCH_DIR}/
 cd ${SCRATCH_DIR}

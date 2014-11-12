@@ -43,6 +43,25 @@
                                 }
                             ]
                         }
+                    },
+                    {
+                        "PolicyName": "signing",
+                        "PolicyDocument": {
+                            "Statement": [
+                                {
+                                    "Action": [
+                                        "s3:HeadObject",
+                                        "s3:GetObject",
+                                        "s3:GetObjectAcl"
+                                    ],
+                                    "Effect": "Allow",
+                                    "Resource": [
+                                        "arn:aws:s3:::mapbox/mapbox-studio/certs/authenticode.spc",
+                                        "arn:aws:s3:::mapbox/mapbox-studio/certs/authenticode.pvk"
+                                    ]
+                                }
+                            ]
+                        }
                     }
                 ]
             }

@@ -8,6 +8,7 @@ node_js:
 env:
   matrix:
   - NODE_VERSION="0.10.33"
+  - NODE_VERSION="0.11.14"
   global:
   - S3_URL: "s3://mapbox/node-cpp11"
   - secure: "QBFgsoBkhQHDVJChsdyUoL5FoFsZ6Je+c+Hvl5TZuI51QQCMu2TDY+qDC9/tHpzVQEr7PTHxB0m5rp6e6Q5HcRzhQwYjUC3AVkkZBfEJlfWPionIVcyZqQNbomhBlMkM8sWeTgopPMqW8kGFaWMfU2ZkRoll78vMcYSmw6VBS/Y="

@@ -49,18 +49,18 @@ IF ERRORLEVEL 1 GOTO ERROR
 ::CALL vcbuild.bat %BUILD_TYPE% x86 nosign
 ::IF ERRORLEVEL 1 GOTO ERROR
 
-::call aws s3 cp --acl public-read Release\node.exe s3://mapbox/node-cpp11/v%NODE_VERSION%/
-::IF ERRORLEVEL 1 GOTO ERROR
-::call aws s3 cp --acl public-read Release\node.lib s3://mapbox/node-cpp11/v%NODE_VERSION%/
-::IF ERRORLEVEL 1 GOTO ERROR
-::call aws s3 cp --acl public-read Release\node.exp s3://mapbox/node-cpp11/v%NODE_VERSION%/
-::IF ERRORLEVEL 1 GOTO ERROR
-::call aws s3 cp --acl public-read Release\node.pdb s3://mapbox/node-cpp11/v%NODE_VERSION%/
-::IF ERRORLEVEL 1 GOTO ERROR
-::call aws s3 cp --acl public-read Release\openssl-cli.exe s3://mapbox/node-cpp11/v%NODE_VERSION%/
-::IF ERRORLEVEL 1 GOTO ERROR
-::call aws s3 cp --acl public-read Release\openssl-cli.pdb s3://mapbox/node-cpp11/v%NODE_VERSION%/
-::IF ERRORLEVEL 1 GOTO ERROR
+call aws s3 cp --acl public-read Release\node.exe s3://mapbox/node-cpp11/v%NODE_VERSION%/
+IF ERRORLEVEL 1 GOTO ERROR
+call aws s3 cp --acl public-read Release\node.lib s3://mapbox/node-cpp11/v%NODE_VERSION%/
+IF ERRORLEVEL 1 GOTO ERROR
+call aws s3 cp --acl public-read Release\node.exp s3://mapbox/node-cpp11/v%NODE_VERSION%/
+IF ERRORLEVEL 1 GOTO ERROR
+call aws s3 cp --acl public-read Release\node.pdb s3://mapbox/node-cpp11/v%NODE_VERSION%/
+IF ERRORLEVEL 1 GOTO ERROR
+call aws s3 cp --acl public-read Release\openssl-cli.exe s3://mapbox/node-cpp11/v%NODE_VERSION%/
+IF ERRORLEVEL 1 GOTO ERROR
+call aws s3 cp --acl public-read Release\openssl-cli.pdb s3://mapbox/node-cpp11/v%NODE_VERSION%/
+IF ERRORLEVEL 1 GOTO ERROR
 
 ::ECHO.
 ::ECHO ------------------------------------------------------------

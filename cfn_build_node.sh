@@ -39,7 +39,7 @@ curl -s https://s3.amazonaws.com/mapbox/apps/install-node/v0.2.0/run | NV=0.10.3
 
 # install cfn-ci + cfn-config
 npm install https://github.com/mapbox/cfn-ci/tarball/windows
-npm install cfn-config@0.3.0
+npm install https://github.com/mapbox/cfn-config/tarball/aws-sdk-latest
 
 # create cfn stack for building
 timeout 1200 $TMP/node_modules/.bin/cfn-create -f -r us-east-1 -n "travis-node-cpp11-$TRAVIS_JOB_ID" -t $TMP/node_modules/cfn-ci/cfn-win.template -c $ConfigJSON || echo "cfn-create failed, cleaning up ..." &

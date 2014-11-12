@@ -5,6 +5,9 @@ cache: apt
 node_js:
   - "0.10"
 
+compiler:
+  - clang
+
 env:
   matrix:
   - NODE_VERSION="0.10.33"

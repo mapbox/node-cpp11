@@ -1,3 +1,7 @@
+@echo off
+SETLOCAL
+SET EL=0
+
 :: install deps
 cinst wget
 cinst 7zip
@@ -14,7 +18,15 @@ call msiexec /quiet /i python-2.7.8.amd64.msi
 :: build
 cd Z:\node-cpp11
 call .\windows\settings.bat 64 14 release 1> Z:\build1.log 2>&1
-call .\windows\build_node.bat 1> Z:\build2.log 2>&1
-call .\windows\settings.bat 32 14 release 1> Z:\build1.log 2>&1
-call .\windows\build_node.bat 1> Z:\build2.log 2>&1
+call .\windows\build_node.bat 1> Z:\build-x64.log 2>&1
+call .\windows\settings.bat 32 14 release 1> Z:\build2.log 2>&1
+call .\windows\build_node.bat 1> Z:\build-x86.log 2>&1
 
+GOTO DONE
+
+:ERROR
+SET EL=%ERRORLEVEL%
+
+:DONE
+
+EXIT /b %EL%

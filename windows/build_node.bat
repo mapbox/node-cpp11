@@ -19,47 +19,32 @@ if NOT EXIST node-v%NODE_VERSION% (
 cd node-v%NODE_VERSION%
 IF ERRORLEVEL 1 GOTO ERROR
 
+:: clear out previous builds
+if EXIST %BUILD_TYPE% (
+    rd /q /s %BUILD_TYPE%
+)
+
 ECHO.
 ECHO ---------------- BUILDING  NODE %NODE_VERSION% --------------
 
-:: 64 bit
-CALL vcbuild.bat %BUILD_TYPE% x64 nosign
+CALL vcbuild.bat %BUILD_TYPE% %BUILDPLATFORM% nosign
 IF ERRORLEVEL 1 GOTO ERROR
 
-call aws s3 cp --acl public-read Release\node.exe s3://mapbox/node-cpp11/v%NODE_VERSION%/x64/
-IF ERRORLEVEL 1 GOTO ERROR
-call aws s3 cp --acl public-read Release\node.lib s3://mapbox/node-cpp11/v%NODE_VERSION%/x64/
-IF ERRORLEVEL 1 GOTO ERROR
-call aws s3 cp --acl public-read Release\node.exp s3://mapbox/node-cpp11/v%NODE_VERSION%/x64/
-IF ERRORLEVEL 1 GOTO ERROR
-call aws s3 cp --acl public-read Release\node.pdb s3://mapbox/node-cpp11/v%NODE_VERSION%/x64/
-IF ERRORLEVEL 1 GOTO ERROR
-call aws s3 cp --acl public-read Release\openssl-cli.exe s3://mapbox/node-cpp11/v%NODE_VERSION%/x64/
-IF ERRORLEVEL 1 GOTO ERROR
-call aws s3 cp --acl public-read Release\openssl-cli.pdb s3://mapbox/node-cpp11/v%NODE_VERSION%/x64/
-IF ERRORLEVEL 1 GOTO ERROR
+SET ARCHPATH=
+IF %BUILDPLATFORM% EQU x64 (SET ARCHPATH="x64/")
 
-:: TODO - not yet working - perhaps because settings.bat creates 64 compiler env
-:: clean to prepare for 32 bit build
-::CALL vcbuild.bat %BUILD_TYPE% clean x64 nosign
-
-:: 32 bit
-::CALL vcbuild.bat %BUILD_TYPE% x86 nosign
+call aws s3 cp --acl public-read %BUILD_TYPE%\node.exe s3://mapbox/node-cpp11/v%NODE_VERSION%/%ARCHPATH%
 ::IF ERRORLEVEL 1 GOTO ERROR
-
-call aws s3 cp --acl public-read Release\node.exe s3://mapbox/node-cpp11/v%NODE_VERSION%/
-IF ERRORLEVEL 1 GOTO ERROR
-call aws s3 cp --acl public-read Release\node.lib s3://mapbox/node-cpp11/v%NODE_VERSION%/
-IF ERRORLEVEL 1 GOTO ERROR
-call aws s3 cp --acl public-read Release\node.exp s3://mapbox/node-cpp11/v%NODE_VERSION%/
-IF ERRORLEVEL 1 GOTO ERROR
-call aws s3 cp --acl public-read Release\node.pdb s3://mapbox/node-cpp11/v%NODE_VERSION%/
-IF ERRORLEVEL 1 GOTO ERROR
-call aws s3 cp --acl public-read Release\openssl-cli.exe s3://mapbox/node-cpp11/v%NODE_VERSION%/
-IF ERRORLEVEL 1 GOTO ERROR
-call aws s3 cp --acl public-read Release\openssl-cli.pdb s3://mapbox/node-cpp11/v%NODE_VERSION%/
-IF ERRORLEVEL 1 GOTO ERROR
-
+call aws s3 cp --acl public-read %BUILD_TYPE%\node.lib s3://mapbox/node-cpp11/v%NODE_VERSION%/%ARCHPATH%
+::IF ERRORLEVEL 1 GOTO ERROR
+call aws s3 cp --acl public-read %BUILD_TYPE%\node.exp s3://mapbox/node-cpp11/v%NODE_VERSION%/%ARCHPATH%
+::IF ERRORLEVEL 1 GOTO ERROR
+call aws s3 cp --acl public-read %BUILD_TYPE%\node.pdb s3://mapbox/node-cpp11/v%NODE_VERSION%/%ARCHPATH%
+::IF ERRORLEVEL 1 GOTO ERROR
+call aws s3 cp --acl public-read %BUILD_TYPE%\openssl-cli.exe s3://mapbox/node-cpp11/v%NODE_VERSION%/%ARCHPATH%
+::IF ERRORLEVEL 1 GOTO ERROR
+call aws s3 cp --acl public-read %BUILD_TYPE%\openssl-cli.pdb s3://mapbox/node-cpp11/v%NODE_VERSION%/%ARCHPATH%
+::IF ERRORLEVEL 1 GOTO ERROR
 
 GOTO DONE
 

@@ -26,6 +26,7 @@ set PATH=C:\Program Files (x86)\Git\bin;%PATH%
 
 SET PLATFORM_TOOLSET=v140
 if "%TARGET_ARCH%" == "32" (
+  set BUILDPLATFORM=x86
   REM :: CALL "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86
   REM :: >..\..\src\agg\process_markers_symbolizer.cpp(108): fatal error C1060: compiler is out of heap space [C:\dev2\mapnik-dependencies\packages\mapnik-3.x\mapnik-gyp\build\mapnik.vcxproj]
   REM :: configure this Command Prompt window for 64-bit command-line builds that target x86 platforms
@@ -33,6 +34,7 @@ if "%TARGET_ARCH%" == "32" (
   CALL "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64_x86
 )
 if "%TARGET_ARCH%" == "64" (
+  set BUILDPLATFORM=x64
   CALL "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64
 )
 

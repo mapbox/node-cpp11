@@ -22,10 +22,8 @@ IF ERRORLEVEL 1 GOTO ERROR
 ECHO.
 ECHO ---------------- BUILDING  NODE %NODE_VERSION% --------------
 
-SET BUILD_TYPE=Release
-
 :: 64 bit
-CALL vcbuild.bat %BUILD_TYPE% %BUILDPLATFORM% nosign
+CALL vcbuild.bat %BUILD_TYPE% x64 nosign
 IF ERRORLEVEL 1 GOTO ERROR
 
 call aws s3 cp --acl public-read Release\node.exe s3://mapbox/node-cpp11/v%NODE_VERSION%/x64/
@@ -61,14 +59,6 @@ call aws s3 cp --acl public-read Release\openssl-cli.exe s3://mapbox/node-cpp11/
 IF ERRORLEVEL 1 GOTO ERROR
 call aws s3 cp --acl public-read Release\openssl-cli.pdb s3://mapbox/node-cpp11/v%NODE_VERSION%/
 IF ERRORLEVEL 1 GOTO ERROR
-
-::ECHO.
-::ECHO ------------------------------------------------------------
-::ECHO running tests
-::ECHO ------------------------------------------------------------
-::ECHO.
-::CALL vcbuild %BUILD_TYPE% x%TARGET_ARCH% nosign nobuild test-uv
-::IF ERRORLEVEL 1 GOTO ERROR
 
 
 GOTO DONE

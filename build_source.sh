@@ -10,14 +10,14 @@ if [[ ${S3_URL:-false} == false ]]; then
     exit 1
 fi
 
+if [ -n "$NAME" ]; then
+    S3_URL="$S3_URL/$NAME"
+fi
+
 set -e -u
 
 CWD=$(pwd)
 BUILD_DIR=/tmp/v${NODE_VERSION}
-
-if [ -n "$NAME" ]; then
-    S3_URL="$S3_URL/$NAME"
-fi
 
 git clone https://github.com/mapbox/node.git -b ${BRANCH} $BUILD_DIR
 cd $BUILD_DIR

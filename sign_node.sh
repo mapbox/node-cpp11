@@ -15,14 +15,14 @@ if [[ ${WINCERT_PASSWORD:-false} == false ]]; then
     exit 1
 fi
 
+if [ -n "$NAME" ]; then
+    S3_URL="$S3_URL/$NAME"
+fi
+
 set -e -u
 
 TMP=/tmp/v${NODE_VERSION}-signing
 mkdir -p ${TMP}/x64
-
-if [ -n "$NAME" ]; then
-    S3_URL="$S3_URL/$NAME"
-fi
 
 # Download built node
 aws s3 cp ${S3_URL}/v${NODE_VERSION}/node.exe ${TMP}/

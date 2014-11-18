@@ -12,8 +12,8 @@ IF "%1"=="" ( ECHO using default %NODE_VERSION% ) ELSE ( SET NODE_VERSION=%1)
 ECHO using %NODE_VERSION%
 
 cd %PKGDIR%
-if NOT EXIST node-v%NODE_VERSION%%NAME% (
-    git clone https://github.com/mapbox/node.git -b %BRANCH% node-v%NODE_VERSION%%NAME%
+if NOT EXIST node-v%NODE_VERSION% (
+    git clone https://github.com/mapbox/node.git -b %BRANCH% node-v%NODE_VERSION%
 )
 
 cd node-v%NODE_VERSION%

@@ -5,6 +5,7 @@ if [[ ${NODE_VERSION:-false} == false ]]; then
     exit 1
 fi
 
+NAME=${NAME:-""}
 TRAVIS_JOB_ID=${TRAVIS_JOB_ID:-"localdev"}
 COMMIT_MESSAGE=${COMMIT_MESSAGE:-"commit"}
 GithubAccessToken=${GithubAccessToken:-"dummy"}
@@ -18,6 +19,8 @@ ConfigJSON="$TMP/$TRAVIS_JOB_ID-cfn.json"
 UserData=$(node -e "
     var userdata = '';
     userdata += 'set NODE_VERSION=$NODE_VERSION\n';
+    userdata += 'set NAME=$NAME\n';
+    userdata += 'set BRANCH=$BRANCH\n';
     userdata += 'set AWS_ACCESS_KEY_ID=$BUILD_AWS_ACCESS_KEY_ID\n';
     userdata += 'set AWS_SECRET_ACCESS_KEY=$BUILD_AWS_SECRET_ACCESS_KEY\n';
     userdata += require('fs').readFileSync('$(dirname $0)/cfn_build_node.userdata.bat','utf8');
@@ -39,10 +42,10 @@ curl -s https://s3.amazonaws.com/mapbox/apps/install-node/v0.2.0/run | NV=0.10.3
 
 # install cfn-ci + cfn-config
 npm install https://github.com/mapbox/cfn-ci/tarball/windows
-npm install https://github.com/mapbox/cfn-config/tarball/aws-sdk-latest
+npm install cfn-config
 
 # create cfn stack for building
-timeout 1200 $TMP/node_modules/.bin/cfn-create -f -r us-east-1 -n "travis-node-cpp11-$TRAVIS_JOB_ID" -t $TMP/node_modules/cfn-ci/cfn-win.template -c $ConfigJSON || echo "cfn-create failed, cleaning up ..." &
+timeout 2400 $TMP/node_modules/.bin/cfn-create -f -r us-east-1 -n "travis-node-cpp11-$TRAVIS_JOB_ID" -t $TMP/node_modules/cfn-ci/cfn-win.template -c $ConfigJSON || echo "cfn-create failed, cleaning up ..." &
 
 # Node builds can take a long time.
 # Output for travis to chew on to avoid 10 min "no output" timeout.

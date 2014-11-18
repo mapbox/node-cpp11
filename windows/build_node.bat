@@ -13,7 +13,7 @@ ECHO using %NODE_VERSION%
 
 cd %PKGDIR%
 if NOT EXIST node-v%NODE_VERSION% (
-    git clone https://github.com/mapbox/node.git -b v%NODE_VERSION%-nodecpp11 node-v%NODE_VERSION%
+    git clone https://github.com/mapbox/node.git -b %BRANCH% node-v%NODE_VERSION%
 )
 
 cd node-v%NODE_VERSION%
@@ -31,19 +31,22 @@ CALL vcbuild.bat %BUILD_TYPE% %BUILDPLATFORM% nosign
 IF ERRORLEVEL 1 GOTO ERROR
 
 SET ARCHPATH=
-IF %BUILDPLATFORM% EQU x64 (SET ARCHPATH="x64/")
+IF %BUILDPLATFORM% EQU x64 (SET ARCHPATH=x64/)
 
-call aws s3 cp --acl public-read %BUILD_TYPE%\node.exe s3://mapbox/node-cpp11/v%NODE_VERSION%/%ARCHPATH%
+SET S3URL=s3://mapbox/node-cpp11
+IF "%NAME%" NEQ "" (SET S3URL=%S3URL%/%NAME%)
+
+call aws s3 cp --acl public-read %BUILD_TYPE%\node.exe %S3URL%/v%NODE_VERSION%/%ARCHPATH%
 ::IF ERRORLEVEL 1 GOTO ERROR
-call aws s3 cp --acl public-read %BUILD_TYPE%\node.lib s3://mapbox/node-cpp11/v%NODE_VERSION%/%ARCHPATH%
+call aws s3 cp --acl public-read %BUILD_TYPE%\node.lib %S3URL%/v%NODE_VERSION%/%ARCHPATH%
 ::IF ERRORLEVEL 1 GOTO ERROR
-call aws s3 cp --acl public-read %BUILD_TYPE%\node.exp s3://mapbox/node-cpp11/v%NODE_VERSION%/%ARCHPATH%
+call aws s3 cp --acl public-read %BUILD_TYPE%\node.exp %S3URL%/v%NODE_VERSION%/%ARCHPATH%
 ::IF ERRORLEVEL 1 GOTO ERROR
-call aws s3 cp --acl public-read %BUILD_TYPE%\node.pdb s3://mapbox/node-cpp11/v%NODE_VERSION%/%ARCHPATH%
+call aws s3 cp --acl public-read %BUILD_TYPE%\node.pdb %S3URL%/v%NODE_VERSION%/%ARCHPATH%
 ::IF ERRORLEVEL 1 GOTO ERROR
-call aws s3 cp --acl public-read %BUILD_TYPE%\openssl-cli.exe s3://mapbox/node-cpp11/v%NODE_VERSION%/%ARCHPATH%
+call aws s3 cp --acl public-read %BUILD_TYPE%\openssl-cli.exe %S3URL%/v%NODE_VERSION%/%ARCHPATH%
 ::IF ERRORLEVEL 1 GOTO ERROR
-call aws s3 cp --acl public-read %BUILD_TYPE%\openssl-cli.pdb s3://mapbox/node-cpp11/v%NODE_VERSION%/%ARCHPATH%
+call aws s3 cp --acl public-read %BUILD_TYPE%\openssl-cli.pdb %S3URL%/v%NODE_VERSION%/%ARCHPATH%
 ::IF ERRORLEVEL 1 GOTO ERROR
 
 GOTO DONE

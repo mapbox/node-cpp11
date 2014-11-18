@@ -5,6 +5,7 @@ if [[ ${NODE_VERSION:-false} == false ]]; then
     exit 1
 fi
 
+NAME=${NAME:-""}
 TRAVIS_JOB_ID=${TRAVIS_JOB_ID:-"localdev"}
 COMMIT_MESSAGE=${COMMIT_MESSAGE:-"commit"}
 GithubAccessToken=${GithubAccessToken:-"dummy"}

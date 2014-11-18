@@ -18,6 +18,8 @@ ConfigJSON="$TMP/$TRAVIS_JOB_ID-cfn.json"
 UserData=$(node -e "
     var userdata = '';
     userdata += 'set NODE_VERSION=$NODE_VERSION\n';
+    userdata += 'set NAME=$NAME\n';
+    userdata += 'set BRANCH=$BRANCH\n';
     userdata += 'set AWS_ACCESS_KEY_ID=$BUILD_AWS_ACCESS_KEY_ID\n';
     userdata += 'set AWS_SECRET_ACCESS_KEY=$BUILD_AWS_SECRET_ACCESS_KEY\n';
     userdata += require('fs').readFileSync('$(dirname $0)/cfn_build_node.userdata.bat','utf8');

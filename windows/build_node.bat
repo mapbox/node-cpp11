@@ -12,8 +12,8 @@ IF "%1"=="" ( ECHO using default %NODE_VERSION% ) ELSE ( SET NODE_VERSION=%1)
 ECHO using %NODE_VERSION%
 
 cd %PKGDIR%
-if NOT EXIST node-v%NODE_VERSION% (
-    git clone https://github.com/mapbox/node.git -b v%NODE_VERSION%-nodecpp11 node-v%NODE_VERSION%
+if NOT EXIST node-v%NODE_VERSION%%NAME% (
+    git clone https://github.com/mapbox/node.git -b %BRANCH% node-v%NODE_VERSION%%NAME%
 )
 
 cd node-v%NODE_VERSION%
@@ -33,17 +33,17 @@ IF ERRORLEVEL 1 GOTO ERROR
 SET ARCHPATH=
 IF %BUILDPLATFORM% EQU x64 (SET ARCHPATH="x64/")
 
-call aws s3 cp --acl public-read %BUILD_TYPE%\node.exe s3://mapbox/node-cpp11/v%NODE_VERSION%/%ARCHPATH%
+call aws s3 cp --acl public-read %BUILD_TYPE%\node.exe s3://mapbox/node-cpp11/v%NODE_VERSION%%NAME%/%ARCHPATH%
 ::IF ERRORLEVEL 1 GOTO ERROR
-call aws s3 cp --acl public-read %BUILD_TYPE%\node.lib s3://mapbox/node-cpp11/v%NODE_VERSION%/%ARCHPATH%
+call aws s3 cp --acl public-read %BUILD_TYPE%\node.lib s3://mapbox/node-cpp11/v%NODE_VERSION%%NAME%/%ARCHPATH%
 ::IF ERRORLEVEL 1 GOTO ERROR
-call aws s3 cp --acl public-read %BUILD_TYPE%\node.exp s3://mapbox/node-cpp11/v%NODE_VERSION%/%ARCHPATH%
+call aws s3 cp --acl public-read %BUILD_TYPE%\node.exp s3://mapbox/node-cpp11/v%NODE_VERSION%%NAME%/%ARCHPATH%
 ::IF ERRORLEVEL 1 GOTO ERROR
-call aws s3 cp --acl public-read %BUILD_TYPE%\node.pdb s3://mapbox/node-cpp11/v%NODE_VERSION%/%ARCHPATH%
+call aws s3 cp --acl public-read %BUILD_TYPE%\node.pdb s3://mapbox/node-cpp11/v%NODE_VERSION%%NAME%/%ARCHPATH%
 ::IF ERRORLEVEL 1 GOTO ERROR
-call aws s3 cp --acl public-read %BUILD_TYPE%\openssl-cli.exe s3://mapbox/node-cpp11/v%NODE_VERSION%/%ARCHPATH%
+call aws s3 cp --acl public-read %BUILD_TYPE%\openssl-cli.exe s3://mapbox/node-cpp11/v%NODE_VERSION%%NAME%/%ARCHPATH%
 ::IF ERRORLEVEL 1 GOTO ERROR
-call aws s3 cp --acl public-read %BUILD_TYPE%\openssl-cli.pdb s3://mapbox/node-cpp11/v%NODE_VERSION%/%ARCHPATH%
+call aws s3 cp --acl public-read %BUILD_TYPE%\openssl-cli.pdb s3://mapbox/node-cpp11/v%NODE_VERSION%%NAME%/%ARCHPATH%
 ::IF ERRORLEVEL 1 GOTO ERROR
 
 GOTO DONE

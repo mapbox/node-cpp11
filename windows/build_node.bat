@@ -33,17 +33,20 @@ IF ERRORLEVEL 1 GOTO ERROR
 SET ARCHPATH=
 IF %BUILDPLATFORM% EQU x64 (SET ARCHPATH="x64/")
 
-call aws s3 cp --acl public-read %BUILD_TYPE%\node.exe s3://mapbox/node-cpp11/v%NODE_VERSION%%NAME%/%ARCHPATH%
+SET NAMEPATH=
+IF "%NAME%" NEQ "" (SET NAMEPATH="/%NAME%")
+
+call aws s3 cp --acl public-read %BUILD_TYPE%\node.exe s3://mapbox/node-cpp11%NAMEPATH%/v%NODE_VERSION%/%ARCHPATH%
 ::IF ERRORLEVEL 1 GOTO ERROR
-call aws s3 cp --acl public-read %BUILD_TYPE%\node.lib s3://mapbox/node-cpp11/v%NODE_VERSION%%NAME%/%ARCHPATH%
+call aws s3 cp --acl public-read %BUILD_TYPE%\node.lib s3://mapbox/node-cpp11%NAMEPATH%/v%NODE_VERSION%/%ARCHPATH%
 ::IF ERRORLEVEL 1 GOTO ERROR
-call aws s3 cp --acl public-read %BUILD_TYPE%\node.exp s3://mapbox/node-cpp11/v%NODE_VERSION%%NAME%/%ARCHPATH%
+call aws s3 cp --acl public-read %BUILD_TYPE%\node.exp s3://mapbox/node-cpp11%NAMEPATH%/v%NODE_VERSION%/%ARCHPATH%
 ::IF ERRORLEVEL 1 GOTO ERROR
-call aws s3 cp --acl public-read %BUILD_TYPE%\node.pdb s3://mapbox/node-cpp11/v%NODE_VERSION%%NAME%/%ARCHPATH%
+call aws s3 cp --acl public-read %BUILD_TYPE%\node.pdb s3://mapbox/node-cpp11%NAMEPATH%/v%NODE_VERSION%/%ARCHPATH%
 ::IF ERRORLEVEL 1 GOTO ERROR
-call aws s3 cp --acl public-read %BUILD_TYPE%\openssl-cli.exe s3://mapbox/node-cpp11/v%NODE_VERSION%%NAME%/%ARCHPATH%
+call aws s3 cp --acl public-read %BUILD_TYPE%\openssl-cli.exe s3://mapbox/node-cpp11%NAMEPATH%/v%NODE_VERSION%/%ARCHPATH%
 ::IF ERRORLEVEL 1 GOTO ERROR
-call aws s3 cp --acl public-read %BUILD_TYPE%\openssl-cli.pdb s3://mapbox/node-cpp11/v%NODE_VERSION%%NAME%/%ARCHPATH%
+call aws s3 cp --acl public-read %BUILD_TYPE%\openssl-cli.pdb s3://mapbox/node-cpp11%NAMEPATH%/v%NODE_VERSION%/%ARCHPATH%
 ::IF ERRORLEVEL 1 GOTO ERROR
 
 GOTO DONE

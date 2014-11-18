@@ -10,6 +10,10 @@ if [[ ${S3_URL:-false} == false ]]; then
     exit 1
 fi
 
+if [ -n "$NAME" ]; then
+    S3_URL="$S3_URL/$NAME"
+fi
+
 SCRATCH_DIR=/tmp/v${NODE_VERSION}-scratch
 mkdir -p ${SCRATCH_DIR}
 aws s3 cp --recursive ${S3_URL}/v${NODE_VERSION}/ ${SCRATCH_DIR}/

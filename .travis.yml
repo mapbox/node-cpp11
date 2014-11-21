@@ -1,31 +1,24 @@
-language: node_js
+language: cpp
 
-cache: apt
-
-node_js:
-  - "0.10"
+os:
+  - linux
+  - osx
 
 compiler:
   - clang
 
 env:
   matrix:
-  - NODE_VERSION="0.10.33" NAME= BRANCH=v0.10.33-nodecpp11
-  - NODE_VERSION="0.11.14" NAME= BRANCH=v0.11.14-nodecpp11
-  # - NODE_VERSION="0.10.33" NAME=putenv BRANCH=v0.10.33-nodecpp11-putenv
+   - NODE_VERSION="0.10.33" NAME= BRANCH=v0.10.33-nodecpp11
+   - NODE_VERSION="0.11.14" NAME= BRANCH=v0.11.14-nodecpp11
   global:
-  - JOBS: 8
-  - S3_URL: "s3://mapbox/node-cpp11"
-  - secure: "QBFgsoBkhQHDVJChsdyUoL5FoFsZ6Je+c+Hvl5TZuI51QQCMu2TDY+qDC9/tHpzVQEr7PTHxB0m5rp6e6Q5HcRzhQwYjUC3AVkkZBfEJlfWPionIVcyZqQNbomhBlMkM8sWeTgopPMqW8kGFaWMfU2ZkRoll78vMcYSmw6VBS/Y="
-  - secure: "igL6w789tFas8Vadj2uXVUnr8Z+8AwNJfCUDuWPtrxeX2tIwvzNsbiT+untMgSULlIzT5zbBCvXW6MjyUmsMAnZalHoQqIaEnLPM12gazf2wr7cUpCxZbGE/ukCcqoBnW+8MLNahQAu4xEks460oN5r9S3ngVPGeTeJv50iM8Ss="
-  - secure: "II07EH8qNtu97EY/VXlRwZ4EgzVShLS8gztXCFkLXCbdNWn+ZWOdAf0QIpgnFEGx8/M1QOLqQCmEaUyl6S9cs/yRg94wKtX6g4JQ3KRVNi7yn7TBYGBBKBAzB2rZP84I4LKBJZqJIQm1ZQcfEfJT+BlUd6vBH5Y6FJltHTKq5Yk="
-  - secure: "FM2LKGe8UfXJeoqWnAk29Ib5yIIpKp221GZLgMSk0TanF2YWz+/dGTQu0kHyx1wlS+4zzzzNE9n4PMGcV1SUU5sbFfOL0bweIQwrjFPv0ayxGXqAptYm7BzXsCilGPYt9EKIz/Q78tVxnpyQZKnwLVAt6TCexQCburFPZjbkH7M="
-  - secure: "sA/zUb07WEB168qWy3SoqEOHgH/87FHtaPy/X7cEClgtcNXUCisLO+vTNq7Gee1PmYVilim0CRGqf71B1SgRmo1zJwzgKJg+LJN1RZtZ+dEhBKKU6S7KLBqn21k1mUti+iqf3CRUKj1KgadyEh67VmjJ59g0LIbnvCYwW/X4Utc="
-
-before_install:
-- sudo apt-get update -qq
-- sudo apt-get install -qqy curl unzip python-pip mono-devel expect
-- sudo pip install awscli
+   - JOBS: 8
+   - S3_URL: "s3://mapbox/node-cpp11"
+   - secure: "QBFgsoBkhQHDVJChsdyUoL5FoFsZ6Je+c+Hvl5TZuI51QQCMu2TDY+qDC9/tHpzVQEr7PTHxB0m5rp6e6Q5HcRzhQwYjUC3AVkkZBfEJlfWPionIVcyZqQNbomhBlMkM8sWeTgopPMqW8kGFaWMfU2ZkRoll78vMcYSmw6VBS/Y="
+   - secure: "igL6w789tFas8Vadj2uXVUnr8Z+8AwNJfCUDuWPtrxeX2tIwvzNsbiT+untMgSULlIzT5zbBCvXW6MjyUmsMAnZalHoQqIaEnLPM12gazf2wr7cUpCxZbGE/ukCcqoBnW+8MLNahQAu4xEks460oN5r9S3ngVPGeTeJv50iM8Ss="
+   - secure: "II07EH8qNtu97EY/VXlRwZ4EgzVShLS8gztXCFkLXCbdNWn+ZWOdAf0QIpgnFEGx8/M1QOLqQCmEaUyl6S9cs/yRg94wKtX6g4JQ3KRVNi7yn7TBYGBBKBAzB2rZP84I4LKBJZqJIQm1ZQcfEfJT+BlUd6vBH5Y6FJltHTKq5Yk="
+   - secure: "FM2LKGe8UfXJeoqWnAk29Ib5yIIpKp221GZLgMSk0TanF2YWz+/dGTQu0kHyx1wlS+4zzzzNE9n4PMGcV1SUU5sbFfOL0bweIQwrjFPv0ayxGXqAptYm7BzXsCilGPYt9EKIz/Q78tVxnpyQZKnwLVAt6TCexQCburFPZjbkH7M="
+   - secure: "sA/zUb07WEB168qWy3SoqEOHgH/87FHtaPy/X7cEClgtcNXUCisLO+vTNq7Gee1PmYVilim0CRGqf71B1SgRmo1zJwzgKJg+LJN1RZtZ+dEhBKKU6S7KLBqn21k1mUti+iqf3CRUKj1KgadyEh67VmjJ59g0LIbnvCYwW/X4Utc="
 
 script:
 - ./.travis.sh

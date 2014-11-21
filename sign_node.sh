@@ -32,6 +32,9 @@ aws s3 cp ${S3_URL}/v${NODE_VERSION}/x64/node.exe ${TMP}/x64/
 aws s3 cp s3://mapbox/mapbox-studio/certs/authenticode.spc $TMP/authenticode.spc
 aws s3 cp s3://mapbox/mapbox-studio/certs/authenticode.pvk $TMP/authenticode.pvk
 
+# install deps
+sudo apt-get install -y mono-devel expect
+
 # Install windowsign
 npm install -g https://github.com/mapbox/windowsign/archive/v0.0.1.tar.gz
 

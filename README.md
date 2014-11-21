@@ -4,15 +4,6 @@
 
 ## Downloads:
 
-### Installation Options
-
-1) Install with nvm
-
-```sh
-export NVM_NODEJS_ORG_MIRROR=https://mapbox.s3.amazonaws.com/node-cpp11
-nvm install stable
-
-
 ### OS X
 
 v0.11.14

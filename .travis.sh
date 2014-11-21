@@ -16,11 +16,11 @@ if [[ ${platform} == 'linux' ]]; then
     sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
     sudo apt-get update -qqy
     sudo apt-get install -qqy libstdc++6 curl unzip python-pip
-    sudo pip install awscli
 else if [[ ${platform} == 'darwin' ]]; then
     xcrun --sdk macosx --show-sdk-version; fi;
-    sudo easy_install awscli
 fi
+
+sudo pip install awscli
 
 : '
 if [[ ${platform} == 'linux' ]]; then

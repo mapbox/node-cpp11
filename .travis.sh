@@ -9,7 +9,8 @@ if ! echo "$COMMIT_MESSAGE" | grep '\[publish' > /dev/null; then
     exit 0
 fi
 
-platform=$(uname -s | sed "y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/")
+export platform=$(uname -s | sed "y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/")
+
 if [[ ${platform} == 'linux' ]]; then
     # upgrade libstdc++ to support C++11
     sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
@@ -21,7 +22,7 @@ else if [[ ${platform} == 'darwin' ]]; then
     sudo easy_install awscli
 fi
 
-
+: '
 if [[ ${platform} == 'linux' ]]; then
     # launches cfnci stack in sandbox
     # passes BUILD_* keys to cfnci stack for publishing to mapbox bucket
@@ -35,9 +36,8 @@ if [[ ${platform} == 'linux' ]]; then
     AWS_ACCESS_KEY_ID=$MAPBOX_AWS_ACCESS_KEY_ID \
     AWS_SECRET_ACCESS_KEY=$MAPBOX_AWS_SECRET_ACCESS_KEY \
     ./sign_node.sh
-
 fi
-
+'
 # build node source tarball and publish
 AWS_ACCESS_KEY_ID=$MAPBOX_AWS_ACCESS_KEY_ID \
 AWS_SECRET_ACCESS_KEY=$MAPBOX_AWS_SECRET_ACCESS_KEY \

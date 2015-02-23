@@ -3,11 +3,11 @@ SETLOCAL
 SET EL=0
 
 :: install deps
-cinst wget
-cinst 7zip
-cinst curl
-cinst cmake
-cinst awscli
+cinst -y wget
+cinst -y 7zip
+cinst -y curl
+cinst -y cmake
+cinst -y awscli
 SET PATH=%PATH%;C:\Python27;C:\Program Files\Amazon\AWSCLI;C:\Program Files (x86)\Git\cmd;C:\Program Files (x86)\Git\bin;C:\Program Files\7-Zip
 setx PATH "%PATH%;C:\Python27;C:\Program Files\Amazon\AWSCLI;C:\Program Files (x86)\Git\cmd;C:\Program Files (x86)\Git\bin;C:\Program Files\7-Zip" /m
 PATH

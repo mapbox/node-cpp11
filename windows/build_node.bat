@@ -6,17 +6,23 @@ echo ------ NODEJS -----
 :: guard to make sure settings have been sourced
 IF "%ROOTDIR%"=="" ( echo "ROOTDIR variable not set" && GOTO DONE )
 
+ECHO NODE_VERSION: %NODE_VERSION%
+ECHO NAME: %NAME%
+ECHO BRANCH: %BRANCH%
+ECHO BUILDPLATFORM: %BUILDPLATFORM%
+ECHO BUILD_TYPE: %BUILD_TYPE%
+
 SET PUB=0
 IF "%1"=="" ( ECHO using default %NODE_VERSION% ) ELSE ( SET NODE_VERSION=%1)
 
 ECHO using %NODE_VERSION%
 
 cd %PKGDIR%
-if NOT EXIST node-v%NODE_VERSION% (
-    git clone https://github.com/mapbox/node.git -b %BRANCH% node-v%NODE_VERSION%
+if NOT EXIST node-v%NODE_VERSION%-%BUILDPLATFORM% (
+    git clone https://github.com/mapbox/node.git -b %BRANCH% node-v%NODE_VERSION%-%BUILDPLATFORM%
 )
 
-cd node-v%NODE_VERSION%
+cd node-v%NODE_VERSION%-%BUILDPLATFORM%
 IF ERRORLEVEL 1 GOTO ERROR
 
 :: clear out previous builds

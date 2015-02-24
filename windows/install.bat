@@ -15,16 +15,18 @@ PATH
 call wget --no-check-certificate -q https://www.python.org/ftp/python/2.7.8/python-2.7.8.amd64.msi
 call msiexec /quiet /i python-2.7.8.amd64.msi
 
+IF "%NAME%" NEQ "" (SET S3_URL=%S3_URL%/%NAME%)
+
 :: build
 cd Z:\node-cpp11
 call .\windows\settings.bat 64 14 release 1> Z:\build1.log 2>&1
-aws s3 cp Z:\build.log --acl public-read %S3URL%/v%NODE_VERSION%/logs/build.log
+call aws s3 cp --acl public-read Z:\build.log %S3_URL%/v%NODE_VERSION%/logs/build.log
 call .\windows\build_node.bat 1> Z:\build-x64.log 2>&1
-aws s3 cp Z:\build-x64.log --acl public-read %S3URL%/v%NODE_VERSION%/logs/build-x64.log
+call s3 cp --acl public-read Z:\build-x64.log %S3_URL%/v%NODE_VERSION%/logs/build-x64.log
 call .\windows\settings.bat 32 14 release 1> Z:\build2.log 2>&1
-aws s3 cp Z:\build2.log --acl public-read %S3URL%/v%NODE_VERSION%/logs/build2.log
+call s3 cp --acl public-read Z:\build2.log %S3_URL%/v%NODE_VERSION%/logs/build2.log
 call .\windows\build_node.bat 1> Z:\build-x86.log 2>&1
-aws s3 cp Z:\build-x86.log --acl public-read %S3URL%/v%NODE_VERSION%/logs/build-x86.log
+call s3 cp --acl public-read Z:\build-x86.log %S3_URL%/v%NODE_VERSION%/logs/build-x86.log
 
 GOTO DONE
 

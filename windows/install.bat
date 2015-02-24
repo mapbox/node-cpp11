@@ -15,8 +15,6 @@ PATH
 call wget --no-check-certificate -q https://www.python.org/ftp/python/2.7.8/python-2.7.8.amd64.msi
 call msiexec /quiet /i python-2.7.8.amd64.msi
 
-IF "%NAME%" NEQ "" (SET S3_URL=%S3_URL%/%NAME%)
-
 :: build
 cd Z:\node-cpp11
 call .\windows\settings.bat 64 14 release 1> Z:\build1.log 2>&1

@@ -10,6 +10,10 @@ TRAVIS_JOB_ID=${TRAVIS_JOB_ID:-"localdev"}
 COMMIT_MESSAGE=${COMMIT_MESSAGE:-"commit"}
 GithubAccessToken=${GithubAccessToken:-"dummy"}
 
+if [[ $NAME != "" ]]; then
+    S3_URL=${S3_URL}/${NAME}
+fi
+
 set -e -u
 
 TMP=$(mktemp -d -t node-cpp11.XXXX )
@@ -20,6 +24,7 @@ UserData=$(node -e "
     var userdata = '';
     userdata += 'set NODE_VERSION=$NODE_VERSION\n';
     userdata += 'set NAME=$NAME\n';
+    userdata += 'set S3_URL=$S3_URL\n;'
     userdata += 'set BRANCH=$BRANCH\n';
     userdata += 'set AWS_ACCESS_KEY_ID=$BUILD_AWS_ACCESS_KEY_ID\n';
     userdata += 'set AWS_SECRET_ACCESS_KEY=$BUILD_AWS_SECRET_ACCESS_KEY\n';

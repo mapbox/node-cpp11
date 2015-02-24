@@ -1,6 +1,6 @@
 :: start on Z:\ drive
 cd /d Z:\
-call cinst -y git
+call cinst -y git.commandline
 :: https://github.com/mapbox/node-cpp11/issues/20#issuecomment-75631535
 call TaskKill /IM git.installinstall.exe /F
 call TaskKill /IM git.installinstall.tmp /F

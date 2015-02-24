@@ -28,7 +28,7 @@ UserData=$(node -e "
 ")
 echo "{
     \"OS\": \"win2012-vs2014\",
-    \"InstanceType\": \"c3.2xlarge\",
+    \"InstanceType\": \"c3.4xlarge\",
     \"GithubAccessToken\": \"$GithubAccessToken\",
     \"UserData\": $UserData
 }" >> $ConfigJSON

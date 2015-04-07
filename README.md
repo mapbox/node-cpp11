@@ -29,9 +29,8 @@ v0.12.0
 ### Windows
 
 #### Redistributable Visual Studio 2014 CTP 4 installers:
- - x64: https://mapbox.s3.amazonaws.com/node-cpp11/vcredist_x64.exe 
- - x86: https://mapbox.s3.amazonaws.com/node-cpp11/vcredist_x86.exe 
- - ARM: https://mapbox.s3.amazonaws.com/node-cpp11/vcredist_arm.exe 
+ - x64: https://mapbox.s3.amazonaws.com/windows-builds/visual-studio-runtimes/vcredist-VS2014-CTP4/vcredist_x64.exe 
+ - x86: https://mapbox.s3.amazonaws.com/windows-builds/visual-studio-runtimes/vcredist-VS2014-CTP4/vcredist_x86.exe 
 
 #### Node for Windows / Visual Studio 2014 CTP 4 / 64 bit
 

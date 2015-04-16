@@ -9,9 +9,9 @@ compiler:
 
 env:
   matrix:
-   - NODE_VERSION="0.10.36" NAME=           BRANCH="v0.10.36-nodecpp11"
-   - NODE_VERSION="0.10.33" NAME=blockingio BRANCH="v0.10.33-nodecpp11-blockingio"
-   - NODE_VERSION="0.12.0"  NAME=           BRANCH="v0.12.0-nodecpp11"
+   #- NODE_VERSION="0.10.36" NAME=           BRANCH="v0.10.36-nodecpp11"
+   #- NODE_VERSION="0.10.33" NAME=blockingio BRANCH="v0.10.33-nodecpp11-blockingio"
+   - NODE_VERSION="0.12.2"  NAME=           BRANCH="v0.12.2-nodecpp11"
   global:
    - JOBS: 8
    - S3_URL: "s3://mapbox/node-cpp11"

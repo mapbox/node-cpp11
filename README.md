@@ -8,13 +8,15 @@
 - clone, add remote, port patches forward:
 
 ```
+NODE_VERSION=0.12.7
 git clone git@github.com:mapbox/node.git
 cd node
 git remote add joyent git@github.com:joyent/node.git
 git fetch joyent
-git checkout v0.12.7-release
-git branch v0.12.7-nodecpp11
-git checkout v0.12.7-nodecpp11
+git checkout v${NODE_VERSION}-release
+git branch v${NODE_VERSION}-nodecpp11
+git checkout v${NODE_VERSION}-nodecpp11
+# diff out latest version ported
 git diff joyent/v0.12.2-release origin/v0.12.2-nodecpp11 > v12.diff
 ```
 

@@ -14,6 +14,7 @@ cd node
 git remote add joyent git@github.com:joyent/node.git
 git fetch joyent
 git checkout v${NODE_VERSION}-release
+git push origin v${NODE_VERSION}-release
 git branch v${NODE_VERSION}-nodecpp11
 git checkout v${NODE_VERSION}-nodecpp11
 # diff out latest version ported
@@ -27,7 +28,7 @@ git diff joyent/v0.12.2-release origin/v0.12.2-nodecpp11 > v12.diff
 git commit -a -m "apply c++11 patches"
 git push origin v0.12.7-nodecpp11
 ```
-- create a pull request with the fixes so we have something to link to (like https://github.com/joyent/node/pull/25780)
+- Optional: create a pull request (AGAINST mapbox/node) with the fixes so we have something to link to (like https://github.com/mapbox/node/pull/7)
 - Optional: Test that it builds locally on a windows machine (to save time debugging if it will not yet build)
 - Add it to the versions that automatically get built by this repo: https://github.com/mapbox/node-cpp11/blob/master/.travis.yml#L10-L14
 

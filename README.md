@@ -9,6 +9,9 @@
 v0.10.33
  - x64: https://mapbox.s3.amazonaws.com/node-cpp11/v0.10.33/node-v0.10.33-darwin-x64.tar.gz
 
+v0.10.40
+ - x64: https://mapbox.s3.amazonaws.com/node-cpp11/v0.10.40/node-v0.10.40-darwin-x64.tar.gz
+
 v0.11.14
  - x64: https://mapbox.s3.amazonaws.com/node-cpp11/v0.11.14/node-v0.11.14-darwin-x64.tar.gz
 
@@ -18,10 +21,16 @@ v0.12.0
 v0.12.2
  - x64: https://mapbox.s3.amazonaws.com/node-cpp11/v0.12.2/node-v0.12.2-darwin-x64.tar.gz
 
+v0.12.7
+ - x64: https://mapbox.s3.amazonaws.com/node-cpp11/v0.12.7/node-v0.12.7-darwin-x64.tar.gz
+
 ### Linux
 
 v0.10.33
  - x64: https://mapbox.s3.amazonaws.com/node-cpp11/v0.10.33/node-v0.10.33-linux-x64.tar.gz
+
+v0.10.40
+ - x64: https://mapbox.s3.amazonaws.com/node-cpp11/v0.10.40/node-v0.10.40-linux-x64.tar.gz
 
 v0.11.14
  - x64: https://mapbox.s3.amazonaws.com/node-cpp11/v0.11.14/node-v0.11.14-linux-x64.tar.gz
@@ -31,6 +40,9 @@ v0.12.0
 
 v0.12.2
  - x64: https://mapbox.s3.amazonaws.com/node-cpp11/v0.12.2/node-v0.12.2-linux-x64.tar.gz
+
+v0.12.7
+ - x64: https://mapbox.s3.amazonaws.com/node-cpp11/v0.12.7/node-v0.12.7-linux-x64.tar.gz
 
 ### Windows
 
@@ -44,6 +56,10 @@ v0.10.33
  - x64: https://mapbox.s3.amazonaws.com/node-cpp11/v0.10.33/x64/node.exe
  - x86: https://mapbox.s3.amazonaws.com/node-cpp11/v0.10.33/node.exe
 
+v0.10.40
+ - x64: https://mapbox.s3.amazonaws.com/node-cpp11/v0.10.40/x64/node.exe
+ - x86: https://mapbox.s3.amazonaws.com/node-cpp11/v0.10.40/node.exe
+
 v0.12.0
  - x64: https://mapbox.s3.amazonaws.com/node-cpp11/v0.12.0/x64/node.exe
  - x86: https://mapbox.s3.amazonaws.com/node-cpp11/v0.12.0/node.exe
@@ -51,6 +67,10 @@ v0.12.0
 v0.12.2
  - x64: https://mapbox.s3.amazonaws.com/node-cpp11/v0.12.2/x64/node.exe
  - x86: https://mapbox.s3.amazonaws.com/node-cpp11/v0.12.2/node.exe
+
+v0.12.7
+ - x64: https://mapbox.s3.amazonaws.com/node-cpp11/v0.12.7/x64/node.exe
+ - x86: https://mapbox.s3.amazonaws.com/node-cpp11/v0.12.7/node.exe
 
 ## Adding new node version
 

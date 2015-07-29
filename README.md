@@ -2,6 +2,32 @@
 
 [![Build Status](https://travis-ci.org/mapbox/node-cpp11.svg?branch=master)](https://travis-ci.org/mapbox/node-cpp11)
 
+## Adding new node version
+
+- head over to https://github.com/mapbox/node
+- clone, add remote, port patches forward:
+
+```
+git clone git@github.com:mapbox/node.git
+cd node
+git remote add joyent git@github.com:joyent/node.git
+git fetch joyent
+git checkout v0.12.7-release
+git branch v0.12.7-nodecpp11
+git checkout v0.12.7-nodecpp11
+git diff joyent/v0.12.2-release origin/v0.12.2-nodecpp11 > v12.diff
+```
+
+- manually integrate the `v12.diff` patch (very unlikely that `git apply v12.diff` will work)
+- then commit:
+
+```
+git commit -a -m "apply c++11 patches"
+git push origin v0.12.7-nodecpp11
+```
+- create a pull request with the fixes so we have something to link to (like https://github.com/joyent/node/pull/25780)
+
+
 ## Downloads:
 
 ### OS X

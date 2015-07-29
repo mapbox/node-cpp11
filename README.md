@@ -26,7 +26,8 @@ git commit -a -m "apply c++11 patches"
 git push origin v0.12.7-nodecpp11
 ```
 - create a pull request with the fixes so we have something to link to (like https://github.com/joyent/node/pull/25780)
-
+- Optional: Test that it builds locally on a windows machine (to save time debugging if it will not yet build)
+- Add it to the versions that automatically get built by this repo: https://github.com/mapbox/node-cpp11/blob/master/.travis.yml#L10-L14
 
 ## Downloads:
 

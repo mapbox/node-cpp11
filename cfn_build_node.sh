@@ -32,7 +32,7 @@ UserData=$(node -e "
     console.log(JSON.stringify(userdata));
 ")
 echo "{
-    \"OS\": \"win2012-vs2014\",
+    \"OS\": \"win2012-vs2015\",
     \"InstanceType\": \"c3.4xlarge\",
     \"GithubAccessToken\": \"$GithubAccessToken\",
     \"UserData\": $UserData
@@ -46,7 +46,7 @@ export PATH=$PATH:$TMP/bin
 curl -s https://s3.amazonaws.com/mapbox/apps/install-node/v0.2.0/run | NV=0.10.33 NP=linux OD=$TMP sh
 
 # install cfn-ci + cfn-config
-npm install https://github.com/mapbox/cfn-ci/tarball/windows
+npm install https://github.com/mapbox/cfn-ci/tarball/vs2015
 npm install cfn-config
 
 # create cfn stack for building

@@ -1,4 +1,4 @@
-os: Visual Studio 2014 CTP4
+os: Visual Studio 2015
 
 configuration:
   - Debug
@@ -9,7 +9,7 @@ platform:
   - x64
 
 install:
-  - git clone https://github.com/mapbox/node.git -b v0.10.33-nodecpp11-blockingio node
+  - git clone https://github.com/mapbox/node.git -b v0.10.40 node
   - cd node
   - vcbuild %configuration% %platform% nosign
 

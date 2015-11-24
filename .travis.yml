@@ -15,8 +15,9 @@ env:
    #- NODE_VERSION="0.11.14" NAME=           BRANCH="v0.11.14-nodecpp11"
    #- NODE_VERSION="0.12.0"  NAME=           BRANCH="v0.12.0-nodecpp11"
    #- NODE_VERSION="0.12.2"  NAME=           BRANCH="v0.12.2-nodecpp11"
-   - NODE_VERSION="0.10.40"  NAME=           BRANCH="v0.10.40-nodecpp11"
-   - NODE_VERSION="0.12.7"  NAME=           BRANCH="v0.12.7-nodecpp11"
+   #- NODE_VERSION="0.10.40"  NAME=           BRANCH="v0.10.40-nodecpp11"
+   #- NODE_VERSION="0.12.7"  NAME=           BRANCH="v0.12.7-nodecpp11"
+   - NODE_VERSION="5.1.0"  NAME=           BRANCH="v5.1.0-nodecpp11"
   global:
    - JOBS: 8
    - S3_URL: "s3://mapbox/node-cpp11"

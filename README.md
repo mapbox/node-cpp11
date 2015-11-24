@@ -46,11 +46,11 @@ v0.12.7
 
 ### Windows
 
-#### Redistributable Visual Studio 2014 CTP 4 installers:
- - x64: https://mapbox.s3.amazonaws.com/windows-builds/visual-studio-runtimes/vcredist-VS2014-CTP4/vcredist_x64.exe 
- - x86: https://mapbox.s3.amazonaws.com/windows-builds/visual-studio-runtimes/vcredist-VS2014-CTP4/vcredist_x86.exe 
+#### Redistributable Visual Studio 2015 installers:
+ - x64: https://mapbox.s3.amazonaws.com/windows-builds/visual-studio-runtimes/vcredist-VS2015/vcredist_x64.exe 
+ - x86: https://mapbox.s3.amazonaws.com/windows-builds/visual-studio-runtimes/vcredist-VS2015/vcredist_x86.exe 
 
-#### Node for Windows / Visual Studio 2014 CTP 4 / 64 bit
+#### Node for Windows / Visual Studio 2015
 
 v0.10.33
  - x64: https://mapbox.s3.amazonaws.com/node-cpp11/v0.10.33/x64/node.exe

@@ -28,8 +28,10 @@ if [[ ${platform} == 'linux' ]]; then
     make -j${JOBS} ${SOURCE_TARBALL}
     aws s3 cp --acl=public-read ${SOURCE_TARBALL} ${S3_URL}/v${NODE_VERSION}/${SOURCE_TARBALL}
 fi
-BINARY_TARBALL=node-v${NODE_VERSION}-${platform}-x64.tar.gz
-make -j${JOBS} ${BINARY_TARBALL}
+
+# Node 5 and above has a tarball target that does not expect .gz
+BINARY_TARBALL=node-v${NODE_VERSION}-${platform}-x64.tar
+make -j${JOBS} ${BINARY_TARBALL} || make -j${JOBS} ${BINARY_TARBALL}.gz
 aws s3 cp --acl=public-read ${BINARY_TARBALL} ${S3_URL}/v${NODE_VERSION}/${BINARY_TARBALL}
 
 cd $CWD

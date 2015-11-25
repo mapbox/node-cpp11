@@ -31,12 +31,28 @@ if [[ ${NODE_VERSION} =~ "0.10" ]] || [[ ${NODE_VERSION} =~ "0.12" ]]; then
     BINARY_TARBALL="${BINARY_TARBALL}.gz"
 fi
 
+function upload() {
+    aws s3 cp --acl=public-read ${1} ${S3_URL}/v${NODE_VERSION}/${1}
+}
+
+function try_upload() {
+    if [[ -f ${SOURCE_TARBALL} ]]; then
+        upload ${SOURCE_TARBALL}
+    fi
+    if [[ -f ${SOURCE_TARBALL}.gz ]]; then
+        upload ${SOURCE_TARBALL}.gz
+    fi
+    if [[ -f ${SOURCE_TARBALL}.xz ]]; then
+        upload ${SOURCE_TARBALL}.xz
+    fi
+}
+
 if [[ ${platform} == 'linux' ]]; then
     make -j${JOBS} ${SOURCE_TARBALL}
-    aws s3 cp --acl=public-read ${SOURCE_TARBALL} ${S3_URL}/v${NODE_VERSION}/${SOURCE_TARBALL}
+    try_upload ${SOURCE_TARBALL}
 fi
 
 make -j${JOBS} ${BINARY_TARBALL}
-aws s3 cp --acl=public-read ${BINARY_TARBALL} ${S3_URL}/v${NODE_VERSION}/${BINARY_TARBALL}
+try_upload ${BINARY_TARBALL}
 
 cd $CWD

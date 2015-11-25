@@ -22,6 +22,8 @@ addons:
      - curl
      - unzip
      - python-pip
+     - mono-devel
+     - expect
 
 
 env:

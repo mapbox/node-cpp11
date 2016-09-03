@@ -37,8 +37,9 @@ env:
    #- NODE_VERSION="0.10.40"  NAME=           BRANCH="v0.10.40-nodecpp11"
    #- NODE_VERSION="0.12.7"  NAME=           BRANCH="v0.12.7-nodecpp11"
    #- NODE_VERSION="5.1.0"  NAME=           BRANCH="v5.1.0-nodecpp11"
-   - NODE_VERSION="4.4.1"  NAME=           BRANCH="v4.4.1-nodecpp11"
-   - NODE_VERSION="5.9.1"  NAME=           BRANCH="v5.9.1-nodecpp11"
+   #- NODE_VERSION="4.4.1"  REPO=https://github.com/mapbox/node NAME=           BRANCH="v4.4.1-nodecpp11"
+   #- NODE_VERSION="5.9.1"  REPO=https://github.com/mapbox/node NAME=           BRANCH="v5.9.1-nodecpp11"
+   - NODE_VERSION="6.5.0"  REPO=https://github.com/nodejs/node NAME=           BRANCH="v6.5.0"
   global:
    - JOBS: 8
    - S3_URL: "s3://mapbox/node-cpp11"

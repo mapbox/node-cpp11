@@ -19,7 +19,7 @@ set -e -u
 CWD=$(pwd)
 BUILD_DIR=/tmp/v${NODE_VERSION}
 
-git clone https://github.com/mapbox/node.git -b ${BRANCH} $BUILD_DIR
+git clone ${REPO} -b ${BRANCH} $BUILD_DIR
 cd $BUILD_DIR
 ./configure --prefix=$BUILD_DIR
 export platform=$(uname -s | sed "y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/")

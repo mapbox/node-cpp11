@@ -18,6 +18,7 @@ addons:
      - ubuntu-toolchain-r-test
      - llvm-toolchain-precise-3.5
     packages:
+     - clang-3.5
      - libstdc++6
      - curl
      - unzip
@@ -50,4 +51,16 @@ env:
    - secure: "sA/zUb07WEB168qWy3SoqEOHgH/87FHtaPy/X7cEClgtcNXUCisLO+vTNq7Gee1PmYVilim0CRGqf71B1SgRmo1zJwzgKJg+LJN1RZtZ+dEhBKKU6S7KLBqn21k1mUti+iqf3CRUKj1KgadyEh67VmjJ59g0LIbnvCYwW/X4Utc="
 
 script:
+# fixes clang-3.4 compile with node v6
+- |
+  if [[ $(uname -s) == 'Linux' ]]; then
+    export CC=clang-3.5
+    export CXX=clang++-3.5
+  fi
+# install node from binary to dodge makefile bug
+# in node v6 where it needs an existing node before one is built
+- git clone --depth 1 https://github.com/creationix/nvm.git ./__nvm
+- source ./__nvm/nvm.sh
+- nvm install ${NODE_VERSION}
+- nvm use ${NODE_VERSION}
 - ./.travis.sh

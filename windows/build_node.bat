@@ -38,7 +38,7 @@ if EXIST %BUILD_TYPE% (
 ECHO.
 ECHO ---------------- BUILDING  NODE %NODE_VERSION% --------------
 
-CALL vcbuild.bat %BUILD_TYPE% %BUILDPLATFORM% nosign
+CALL vcbuild.bat %BUILD_TYPE% %BUILDPLATFORM% nosign dll
 IF ERRORLEVEL 1 GOTO ERROR
 
 SET ARCHPATH=

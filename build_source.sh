@@ -48,11 +48,11 @@ function try_upload() {
 }
 
 if [[ ${platform} == 'linux' ]]; then
-    make -j${JOBS} ${SOURCE_TARBALL}
+    make V= -j${JOBS} ${SOURCE_TARBALL}
     try_upload ${SOURCE_TARBALL}
 fi
 
-make -j${JOBS} ${BINARY_TARBALL}
+make V= -j${JOBS} ${BINARY_TARBALL}
 try_upload ${BINARY_TARBALL}
 
 cd $CWD

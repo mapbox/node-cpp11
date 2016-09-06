@@ -52,8 +52,12 @@ env:
    - secure: "sA/zUb07WEB168qWy3SoqEOHgH/87FHtaPy/X7cEClgtcNXUCisLO+vTNq7Gee1PmYVilim0CRGqf71B1SgRmo1zJwzgKJg+LJN1RZtZ+dEhBKKU6S7KLBqn21k1mUti+iqf3CRUKj1KgadyEh67VmjJ59g0LIbnvCYwW/X4Utc="
 
 script:
-- export CC="ccache clang"
-- export CXX="ccache clang++"
+- |
+  if [[ $(uname -s) == 'Darwin' ]]; then
+    brew install ccache
+    export CC="ccache clang -Qunused-arguments"
+    export CXX="ccache clang++ -Qunused-arguments"
+  fi
 # fixes clang-3.4 compile with node v6
 - |
   if [[ $(uname -s) == 'Linux' ]]; then

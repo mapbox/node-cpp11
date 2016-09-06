@@ -11,6 +11,7 @@ sudo: false
 
 cache:
   apt: true
+  ccache: true
 
 addons:
   apt:
@@ -40,7 +41,7 @@ env:
    #- NODE_VERSION="5.1.0"  NAME=           BRANCH="v5.1.0-nodecpp11"
    #- NODE_VERSION="4.4.1"  REPO=https://github.com/mapbox/node NAME=           BRANCH="v4.4.1-nodecpp11"
    #- NODE_VERSION="5.9.1"  REPO=https://github.com/mapbox/node NAME=           BRANCH="v5.9.1-nodecpp11"
-   - NODE_VERSION="6.5.0"  REPO=https://github.com/nodejs/node NAME=           BRANCH="v6.5.0"
+   - NODE_VERSION="6.5.0"  REPO=https://github.com/mapbox/node NAME=           BRANCH="v6.5.0-nodecpp11"
   global:
    - JOBS: 8
    - S3_URL: "s3://mapbox/node-cpp11"
@@ -51,11 +52,13 @@ env:
    - secure: "sA/zUb07WEB168qWy3SoqEOHgH/87FHtaPy/X7cEClgtcNXUCisLO+vTNq7Gee1PmYVilim0CRGqf71B1SgRmo1zJwzgKJg+LJN1RZtZ+dEhBKKU6S7KLBqn21k1mUti+iqf3CRUKj1KgadyEh67VmjJ59g0LIbnvCYwW/X4Utc="
 
 script:
+- export CC="ccache clang"
+- export CXX="ccache clang++"
 # fixes clang-3.4 compile with node v6
 - |
   if [[ $(uname -s) == 'Linux' ]]; then
-    export CC=clang-3.5
-    export CXX=clang++-3.5
+    export CC="ccache clang-3.5"
+    export CXX="ccache clang++-3.5"
   fi
 # install node from binary to dodge makefile bug
 # in node v6 where it needs an existing node before one is built

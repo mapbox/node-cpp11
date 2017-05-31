@@ -1,3 +1,8 @@
+# DEPRECATED
+
+This repo is no longer maintained and its use is discouraged. Now nodejs binaries work find with external libraries build with C++11 support and visual studio 2013 as per https://github.com/mapnik/node-mapnik/pull/758. So this repo and builds are no longer needed: use the standard node.exe from https://nodejs.org/en/download/releases/
+
+
 # C++11 enabled builds of node
 
 [![Build Status](https://travis-ci.org/mapbox/node-cpp11.svg?branch=master)](https://travis-ci.org/mapbox/node-cpp11)
